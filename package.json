@@ -2,7 +2,14 @@
   "name": "gltf-exporter-proto",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
+  "main": "./index.umd.cjs",
+  "module": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    "types": "./index.d.ts",
+    "import": "./index.js",
+    "require": "./index.umd.cjs"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
