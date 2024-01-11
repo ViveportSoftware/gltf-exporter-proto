@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package pb;
+
+message Vec3 {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+message Quat {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+    float w = 4;
+}
+
+message Color {
+    float r = 1;
+    float g = 2;
+    float b = 3;
+    float a = 4;
+}
+
+message Element {
+    string name         = 1;
+    int32 offset        = 2;
+    int32 stride        = 3;
+    int32 dataType      = 4;
+    int32 numComponents = 5;
+    bool normalize      = 6;
+    int32 size          = 7;
+    bool asInt          = 8;
+}
+
+message File {
+    string url = 1;
+}
+
+message Asset {
+    string name = 1;
+    File file   = 2;
+}
+
+message Material {
+    string name                   = 1;
+    map<string, Asset> assets     = 2;
+    Color emissive                = 3;
+    string lightMapChannel        = 4;
+    int32 lightMapUv              = 5;
+    repeated float diffuseFactor  = 6;
+    repeated float specularFactor = 7;
+    bool useMetalness             = 8;
+}
+
+message Mesh {
+    bytes vertexBuffer             = 1;
+    bool interleaved               = 2;
+    repeated Element elements      = 3;
+    bytes indexBuffer              = 4;
+    int32 indexBufferBytesPerIndex = 5;
+    int32 numVertices              = 6;
+}
+
+message MeshInstance {
+    Mesh mesh         = 1;
+    Material material = 2;
+}
+
+message Node {
+    string name                         = 1;
+    repeated Node children              = 2;
+    bytes meshBuffer                    = 3;
+    Vec3 position                       = 4;
+    Quat rotation                       = 5;
+    Vec3 scale                          = 6;
+    repeated MeshInstance meshInstances = 7;
+}
