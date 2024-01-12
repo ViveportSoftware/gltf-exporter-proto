@@ -1628,6 +1628,8 @@ $root.pb = (function() {
          * @property {Array.<number>|null} [diffuseFactor] Material diffuseFactor
          * @property {Array.<number>|null} [specularFactor] Material specularFactor
          * @property {boolean|null} [useMetalness] Material useMetalness
+         * @property {number|null} [aoMapUv] Material aoMapUv
+         * @property {number|null} [diffuseMapUv] Material diffuseMapUv
          */
 
         /**
@@ -1713,6 +1715,22 @@ $root.pb = (function() {
         Material.prototype.useMetalness = false;
 
         /**
+         * Material aoMapUv.
+         * @member {number} aoMapUv
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.aoMapUv = 0;
+
+        /**
+         * Material diffuseMapUv.
+         * @member {number} diffuseMapUv
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.diffuseMapUv = 0;
+
+        /**
          * Creates a new Material instance using the specified properties.
          * @function create
          * @memberof pb.Material
@@ -1763,6 +1781,10 @@ $root.pb = (function() {
             }
             if (message.useMetalness != null && Object.hasOwnProperty.call(message, "useMetalness"))
                 writer.uint32(/* id 8, wireType 0 =*/64).bool(message.useMetalness);
+            if (message.aoMapUv != null && Object.hasOwnProperty.call(message, "aoMapUv"))
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.aoMapUv);
+            if (message.diffuseMapUv != null && Object.hasOwnProperty.call(message, "diffuseMapUv"))
+                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.diffuseMapUv);
             return writer;
         };
 
@@ -1862,6 +1884,14 @@ $root.pb = (function() {
                         message.useMetalness = reader.bool();
                         break;
                     }
+                case 9: {
+                        message.aoMapUv = reader.int32();
+                        break;
+                    }
+                case 10: {
+                        message.diffuseMapUv = reader.int32();
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -1938,6 +1968,12 @@ $root.pb = (function() {
             if (message.useMetalness != null && message.hasOwnProperty("useMetalness"))
                 if (typeof message.useMetalness !== "boolean")
                     return "useMetalness: boolean expected";
+            if (message.aoMapUv != null && message.hasOwnProperty("aoMapUv"))
+                if (!$util.isInteger(message.aoMapUv))
+                    return "aoMapUv: integer expected";
+            if (message.diffuseMapUv != null && message.hasOwnProperty("diffuseMapUv"))
+                if (!$util.isInteger(message.diffuseMapUv))
+                    return "diffuseMapUv: integer expected";
             return null;
         };
 
@@ -1990,6 +2026,10 @@ $root.pb = (function() {
             }
             if (object.useMetalness != null)
                 message.useMetalness = Boolean(object.useMetalness);
+            if (object.aoMapUv != null)
+                message.aoMapUv = object.aoMapUv | 0;
+            if (object.diffuseMapUv != null)
+                message.diffuseMapUv = object.diffuseMapUv | 0;
             return message;
         };
 
@@ -2018,6 +2058,8 @@ $root.pb = (function() {
                 object.lightMapChannel = "";
                 object.lightMapUv = 0;
                 object.useMetalness = false;
+                object.aoMapUv = 0;
+                object.diffuseMapUv = 0;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -2045,6 +2087,10 @@ $root.pb = (function() {
             }
             if (message.useMetalness != null && message.hasOwnProperty("useMetalness"))
                 object.useMetalness = message.useMetalness;
+            if (message.aoMapUv != null && message.hasOwnProperty("aoMapUv"))
+                object.aoMapUv = message.aoMapUv;
+            if (message.diffuseMapUv != null && message.hasOwnProperty("diffuseMapUv"))
+                object.diffuseMapUv = message.diffuseMapUv;
             return object;
         };
 

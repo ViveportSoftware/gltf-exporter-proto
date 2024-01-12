@@ -707,6 +707,12 @@ export namespace pb {
 
         /** Material useMetalness */
         useMetalness?: (boolean|null);
+
+        /** Material aoMapUv */
+        aoMapUv?: (number|null);
+
+        /** Material diffuseMapUv */
+        diffuseMapUv?: (number|null);
     }
 
     /** Represents a Material. */
@@ -741,6 +747,12 @@ export namespace pb {
 
         /** Material useMetalness. */
         public useMetalness: boolean;
+
+        /** Material aoMapUv. */
+        public aoMapUv: number;
+
+        /** Material diffuseMapUv. */
+        public diffuseMapUv: number;
 
         /**
          * Creates a new Material instance using the specified properties.

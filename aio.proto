@@ -51,6 +51,8 @@ message Material {
     repeated float diffuseFactor  = 6;
     repeated float specularFactor = 7;
     bool useMetalness             = 8;
+    int32 aoMapUv                 = 9;
+    int32 diffuseMapUv            = 10;
 }
 
 message Mesh {

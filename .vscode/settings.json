@@ -1,0 +1,8 @@
+{
+    "editor.formatOnSave": true,
+    "[proto3]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    "clang-format.executable": "/opt/homebrew/bin/clang-format",
+    "clang-format.style": "{ IndentWidth: 4, BasedOnStyle: google, AlignConsecutiveAssignments: true }"
+}
