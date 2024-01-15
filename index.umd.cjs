@@ -1630,6 +1630,7 @@ $root.pb = (function() {
          * @property {boolean|null} [useMetalness] Material useMetalness
          * @property {number|null} [aoMapUv] Material aoMapUv
          * @property {number|null} [diffuseMapUv] Material diffuseMapUv
+         * @property {pb.IColor|null} [diffuse] Material diffuse
          */
 
         /**
@@ -1731,6 +1732,14 @@ $root.pb = (function() {
         Material.prototype.diffuseMapUv = 0;
 
         /**
+         * Material diffuse.
+         * @member {pb.IColor|null|undefined} diffuse
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.diffuse = null;
+
+        /**
          * Creates a new Material instance using the specified properties.
          * @function create
          * @memberof pb.Material
@@ -1785,6 +1794,8 @@ $root.pb = (function() {
                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.aoMapUv);
             if (message.diffuseMapUv != null && Object.hasOwnProperty.call(message, "diffuseMapUv"))
                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.diffuseMapUv);
+            if (message.diffuse != null && Object.hasOwnProperty.call(message, "diffuse"))
+                $root.pb.Color.encode(message.diffuse, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
             return writer;
         };
 
@@ -1892,6 +1903,10 @@ $root.pb = (function() {
                         message.diffuseMapUv = reader.int32();
                         break;
                     }
+                case 11: {
+                        message.diffuse = $root.pb.Color.decode(reader, reader.uint32());
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -1974,6 +1989,11 @@ $root.pb = (function() {
             if (message.diffuseMapUv != null && message.hasOwnProperty("diffuseMapUv"))
                 if (!$util.isInteger(message.diffuseMapUv))
                     return "diffuseMapUv: integer expected";
+            if (message.diffuse != null && message.hasOwnProperty("diffuse")) {
+                var error = $root.pb.Color.verify(message.diffuse);
+                if (error)
+                    return "diffuse." + error;
+            }
             return null;
         };
 
@@ -2030,6 +2050,11 @@ $root.pb = (function() {
                 message.aoMapUv = object.aoMapUv | 0;
             if (object.diffuseMapUv != null)
                 message.diffuseMapUv = object.diffuseMapUv | 0;
+            if (object.diffuse != null) {
+                if (typeof object.diffuse !== "object")
+                    throw TypeError(".pb.Material.diffuse: object expected");
+                message.diffuse = $root.pb.Color.fromObject(object.diffuse);
+            }
             return message;
         };
 
@@ -2060,6 +2085,7 @@ $root.pb = (function() {
                 object.useMetalness = false;
                 object.aoMapUv = 0;
                 object.diffuseMapUv = 0;
+                object.diffuse = null;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -2091,6 +2117,8 @@ $root.pb = (function() {
                 object.aoMapUv = message.aoMapUv;
             if (message.diffuseMapUv != null && message.hasOwnProperty("diffuseMapUv"))
                 object.diffuseMapUv = message.diffuseMapUv;
+            if (message.diffuse != null && message.hasOwnProperty("diffuse"))
+                object.diffuse = $root.pb.Color.toObject(message.diffuse, options);
             return object;
         };
 

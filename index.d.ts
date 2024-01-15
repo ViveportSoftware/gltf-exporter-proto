@@ -713,6 +713,9 @@ export namespace pb {
 
         /** Material diffuseMapUv */
         diffuseMapUv?: (number|null);
+
+        /** Material diffuse */
+        diffuse?: (pb.IColor|null);
     }
 
     /** Represents a Material. */
@@ -753,6 +756,9 @@ export namespace pb {
 
         /** Material diffuseMapUv. */
         public diffuseMapUv: number;
+
+        /** Material diffuse. */
+        public diffuse?: (pb.IColor|null);
 
         /**
          * Creates a new Material instance using the specified properties.

@@ -53,6 +53,7 @@ message Material {
     bool useMetalness             = 8;
     int32 aoMapUv                 = 9;
     int32 diffuseMapUv            = 10;
+    Color diffuse                 = 11;
 }
 
 message Mesh {
