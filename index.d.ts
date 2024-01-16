@@ -699,12 +699,6 @@ export namespace pb {
         /** Material lightMapUv */
         lightMapUv?: (number|null);
 
-        /** Material diffuseFactor */
-        diffuseFactor?: (number[]|null);
-
-        /** Material specularFactor */
-        specularFactor?: (number[]|null);
-
         /** Material useMetalness */
         useMetalness?: (boolean|null);
 
@@ -716,6 +710,9 @@ export namespace pb {
 
         /** Material diffuse */
         diffuse?: (pb.IColor|null);
+
+        /** Material specular */
+        specular?: (pb.IColor|null);
     }
 
     /** Represents a Material. */
@@ -742,12 +739,6 @@ export namespace pb {
         /** Material lightMapUv. */
         public lightMapUv: number;
 
-        /** Material diffuseFactor. */
-        public diffuseFactor: number[];
-
-        /** Material specularFactor. */
-        public specularFactor: number[];
-
         /** Material useMetalness. */
         public useMetalness: boolean;
 
@@ -759,6 +750,9 @@ export namespace pb {
 
         /** Material diffuse. */
         public diffuse?: (pb.IColor|null);
+
+        /** Material specular. */
+        public specular?: (pb.IColor|null);
 
         /**
          * Creates a new Material instance using the specified properties.

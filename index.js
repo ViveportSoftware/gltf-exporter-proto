@@ -1623,12 +1623,11 @@ export const pb = $root.pb = (() => {
          * @property {pb.IColor|null} [emissive] Material emissive
          * @property {string|null} [lightMapChannel] Material lightMapChannel
          * @property {number|null} [lightMapUv] Material lightMapUv
-         * @property {Array.<number>|null} [diffuseFactor] Material diffuseFactor
-         * @property {Array.<number>|null} [specularFactor] Material specularFactor
          * @property {boolean|null} [useMetalness] Material useMetalness
          * @property {number|null} [aoMapUv] Material aoMapUv
          * @property {number|null} [diffuseMapUv] Material diffuseMapUv
          * @property {pb.IColor|null} [diffuse] Material diffuse
+         * @property {pb.IColor|null} [specular] Material specular
          */
 
         /**
@@ -1641,8 +1640,6 @@ export const pb = $root.pb = (() => {
          */
         function Material(properties) {
             this.assets = {};
-            this.diffuseFactor = [];
-            this.specularFactor = [];
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1690,22 +1687,6 @@ export const pb = $root.pb = (() => {
         Material.prototype.lightMapUv = 0;
 
         /**
-         * Material diffuseFactor.
-         * @member {Array.<number>} diffuseFactor
-         * @memberof pb.Material
-         * @instance
-         */
-        Material.prototype.diffuseFactor = $util.emptyArray;
-
-        /**
-         * Material specularFactor.
-         * @member {Array.<number>} specularFactor
-         * @memberof pb.Material
-         * @instance
-         */
-        Material.prototype.specularFactor = $util.emptyArray;
-
-        /**
          * Material useMetalness.
          * @member {boolean} useMetalness
          * @memberof pb.Material
@@ -1736,6 +1717,14 @@ export const pb = $root.pb = (() => {
          * @instance
          */
         Material.prototype.diffuse = null;
+
+        /**
+         * Material specular.
+         * @member {pb.IColor|null|undefined} specular
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.specular = null;
 
         /**
          * Creates a new Material instance using the specified properties.
@@ -1774,26 +1763,16 @@ export const pb = $root.pb = (() => {
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.lightMapChannel);
             if (message.lightMapUv != null && Object.hasOwnProperty.call(message, "lightMapUv"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.lightMapUv);
-            if (message.diffuseFactor != null && message.diffuseFactor.length) {
-                writer.uint32(/* id 6, wireType 2 =*/50).fork();
-                for (let i = 0; i < message.diffuseFactor.length; ++i)
-                    writer.float(message.diffuseFactor[i]);
-                writer.ldelim();
-            }
-            if (message.specularFactor != null && message.specularFactor.length) {
-                writer.uint32(/* id 7, wireType 2 =*/58).fork();
-                for (let i = 0; i < message.specularFactor.length; ++i)
-                    writer.float(message.specularFactor[i]);
-                writer.ldelim();
-            }
             if (message.useMetalness != null && Object.hasOwnProperty.call(message, "useMetalness"))
-                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.useMetalness);
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.useMetalness);
             if (message.aoMapUv != null && Object.hasOwnProperty.call(message, "aoMapUv"))
-                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.aoMapUv);
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.aoMapUv);
             if (message.diffuseMapUv != null && Object.hasOwnProperty.call(message, "diffuseMapUv"))
-                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.diffuseMapUv);
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.diffuseMapUv);
             if (message.diffuse != null && Object.hasOwnProperty.call(message, "diffuse"))
-                $root.pb.Color.encode(message.diffuse, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                $root.pb.Color.encode(message.diffuse, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+            if (message.specular != null && Object.hasOwnProperty.call(message, "specular"))
+                $root.pb.Color.encode(message.specular, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
             return writer;
         };
 
@@ -1868,41 +1847,23 @@ export const pb = $root.pb = (() => {
                         break;
                     }
                 case 6: {
-                        if (!(message.diffuseFactor && message.diffuseFactor.length))
-                            message.diffuseFactor = [];
-                        if ((tag & 7) === 2) {
-                            let end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.diffuseFactor.push(reader.float());
-                        } else
-                            message.diffuseFactor.push(reader.float());
-                        break;
-                    }
-                case 7: {
-                        if (!(message.specularFactor && message.specularFactor.length))
-                            message.specularFactor = [];
-                        if ((tag & 7) === 2) {
-                            let end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.specularFactor.push(reader.float());
-                        } else
-                            message.specularFactor.push(reader.float());
-                        break;
-                    }
-                case 8: {
                         message.useMetalness = reader.bool();
                         break;
                     }
-                case 9: {
+                case 7: {
                         message.aoMapUv = reader.int32();
                         break;
                     }
-                case 10: {
+                case 8: {
                         message.diffuseMapUv = reader.int32();
                         break;
                     }
-                case 11: {
+                case 9: {
                         message.diffuse = $root.pb.Color.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 10: {
+                        message.specular = $root.pb.Color.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -1964,20 +1925,6 @@ export const pb = $root.pb = (() => {
             if (message.lightMapUv != null && message.hasOwnProperty("lightMapUv"))
                 if (!$util.isInteger(message.lightMapUv))
                     return "lightMapUv: integer expected";
-            if (message.diffuseFactor != null && message.hasOwnProperty("diffuseFactor")) {
-                if (!Array.isArray(message.diffuseFactor))
-                    return "diffuseFactor: array expected";
-                for (let i = 0; i < message.diffuseFactor.length; ++i)
-                    if (typeof message.diffuseFactor[i] !== "number")
-                        return "diffuseFactor: number[] expected";
-            }
-            if (message.specularFactor != null && message.hasOwnProperty("specularFactor")) {
-                if (!Array.isArray(message.specularFactor))
-                    return "specularFactor: array expected";
-                for (let i = 0; i < message.specularFactor.length; ++i)
-                    if (typeof message.specularFactor[i] !== "number")
-                        return "specularFactor: number[] expected";
-            }
             if (message.useMetalness != null && message.hasOwnProperty("useMetalness"))
                 if (typeof message.useMetalness !== "boolean")
                     return "useMetalness: boolean expected";
@@ -1991,6 +1938,11 @@ export const pb = $root.pb = (() => {
                 let error = $root.pb.Color.verify(message.diffuse);
                 if (error)
                     return "diffuse." + error;
+            }
+            if (message.specular != null && message.hasOwnProperty("specular")) {
+                let error = $root.pb.Color.verify(message.specular);
+                if (error)
+                    return "specular." + error;
             }
             return null;
         };
@@ -2028,20 +1980,6 @@ export const pb = $root.pb = (() => {
                 message.lightMapChannel = String(object.lightMapChannel);
             if (object.lightMapUv != null)
                 message.lightMapUv = object.lightMapUv | 0;
-            if (object.diffuseFactor) {
-                if (!Array.isArray(object.diffuseFactor))
-                    throw TypeError(".pb.Material.diffuseFactor: array expected");
-                message.diffuseFactor = [];
-                for (let i = 0; i < object.diffuseFactor.length; ++i)
-                    message.diffuseFactor[i] = Number(object.diffuseFactor[i]);
-            }
-            if (object.specularFactor) {
-                if (!Array.isArray(object.specularFactor))
-                    throw TypeError(".pb.Material.specularFactor: array expected");
-                message.specularFactor = [];
-                for (let i = 0; i < object.specularFactor.length; ++i)
-                    message.specularFactor[i] = Number(object.specularFactor[i]);
-            }
             if (object.useMetalness != null)
                 message.useMetalness = Boolean(object.useMetalness);
             if (object.aoMapUv != null)
@@ -2052,6 +1990,11 @@ export const pb = $root.pb = (() => {
                 if (typeof object.diffuse !== "object")
                     throw TypeError(".pb.Material.diffuse: object expected");
                 message.diffuse = $root.pb.Color.fromObject(object.diffuse);
+            }
+            if (object.specular != null) {
+                if (typeof object.specular !== "object")
+                    throw TypeError(".pb.Material.specular: object expected");
+                message.specular = $root.pb.Color.fromObject(object.specular);
             }
             return message;
         };
@@ -2069,10 +2012,6 @@ export const pb = $root.pb = (() => {
             if (!options)
                 options = {};
             let object = {};
-            if (options.arrays || options.defaults) {
-                object.diffuseFactor = [];
-                object.specularFactor = [];
-            }
             if (options.objects || options.defaults)
                 object.assets = {};
             if (options.defaults) {
@@ -2084,6 +2023,7 @@ export const pb = $root.pb = (() => {
                 object.aoMapUv = 0;
                 object.diffuseMapUv = 0;
                 object.diffuse = null;
+                object.specular = null;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -2099,16 +2039,6 @@ export const pb = $root.pb = (() => {
                 object.lightMapChannel = message.lightMapChannel;
             if (message.lightMapUv != null && message.hasOwnProperty("lightMapUv"))
                 object.lightMapUv = message.lightMapUv;
-            if (message.diffuseFactor && message.diffuseFactor.length) {
-                object.diffuseFactor = [];
-                for (let j = 0; j < message.diffuseFactor.length; ++j)
-                    object.diffuseFactor[j] = options.json && !isFinite(message.diffuseFactor[j]) ? String(message.diffuseFactor[j]) : message.diffuseFactor[j];
-            }
-            if (message.specularFactor && message.specularFactor.length) {
-                object.specularFactor = [];
-                for (let j = 0; j < message.specularFactor.length; ++j)
-                    object.specularFactor[j] = options.json && !isFinite(message.specularFactor[j]) ? String(message.specularFactor[j]) : message.specularFactor[j];
-            }
             if (message.useMetalness != null && message.hasOwnProperty("useMetalness"))
                 object.useMetalness = message.useMetalness;
             if (message.aoMapUv != null && message.hasOwnProperty("aoMapUv"))
@@ -2117,6 +2047,8 @@ export const pb = $root.pb = (() => {
                 object.diffuseMapUv = message.diffuseMapUv;
             if (message.diffuse != null && message.hasOwnProperty("diffuse"))
                 object.diffuse = $root.pb.Color.toObject(message.diffuse, options);
+            if (message.specular != null && message.hasOwnProperty("specular"))
+                object.specular = $root.pb.Color.toObject(message.specular, options);
             return object;
         };
 

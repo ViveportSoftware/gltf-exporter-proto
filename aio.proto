@@ -43,17 +43,16 @@ message Asset {
 }
 
 message Material {
-    string name                   = 1;
-    map<string, Asset> assets     = 2;
-    Color emissive                = 3;
-    string lightMapChannel        = 4;
-    int32 lightMapUv              = 5;
-    repeated float diffuseFactor  = 6;
-    repeated float specularFactor = 7;
-    bool useMetalness             = 8;
-    int32 aoMapUv                 = 9;
-    int32 diffuseMapUv            = 10;
-    Color diffuse                 = 11;
+    string name               = 1;
+    map<string, Asset> assets = 2;
+    Color emissive            = 3;
+    string lightMapChannel    = 4;
+    int32 lightMapUv          = 5;
+    bool useMetalness         = 6;
+    int32 aoMapUv             = 7;
+    int32 diffuseMapUv        = 8;
+    Color diffuse             = 9;
+    Color specular            = 10;
 }
 
 message Mesh {
