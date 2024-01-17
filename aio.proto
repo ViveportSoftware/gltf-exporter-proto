@@ -53,6 +53,7 @@ message Material {
     int32 diffuseMapUv        = 8;
     Color diffuse             = 9;
     Color specular            = 10;
+    float metalness           = 11;
 }
 
 message Mesh {

@@ -713,6 +713,9 @@ export namespace pb {
 
         /** Material specular */
         specular?: (pb.IColor|null);
+
+        /** Material metalness */
+        metalness?: (number|null);
     }
 
     /** Represents a Material. */
@@ -753,6 +756,9 @@ export namespace pb {
 
         /** Material specular. */
         public specular?: (pb.IColor|null);
+
+        /** Material metalness. */
+        public metalness: number;
 
         /**
          * Creates a new Material instance using the specified properties.

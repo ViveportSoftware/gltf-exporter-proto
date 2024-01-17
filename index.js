@@ -1628,6 +1628,7 @@ export const pb = $root.pb = (() => {
          * @property {number|null} [diffuseMapUv] Material diffuseMapUv
          * @property {pb.IColor|null} [diffuse] Material diffuse
          * @property {pb.IColor|null} [specular] Material specular
+         * @property {number|null} [metalness] Material metalness
          */
 
         /**
@@ -1727,6 +1728,14 @@ export const pb = $root.pb = (() => {
         Material.prototype.specular = null;
 
         /**
+         * Material metalness.
+         * @member {number} metalness
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.metalness = 0;
+
+        /**
          * Creates a new Material instance using the specified properties.
          * @function create
          * @memberof pb.Material
@@ -1773,6 +1782,8 @@ export const pb = $root.pb = (() => {
                 $root.pb.Color.encode(message.diffuse, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
             if (message.specular != null && Object.hasOwnProperty.call(message, "specular"))
                 $root.pb.Color.encode(message.specular, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+            if (message.metalness != null && Object.hasOwnProperty.call(message, "metalness"))
+                writer.uint32(/* id 11, wireType 5 =*/93).float(message.metalness);
             return writer;
         };
 
@@ -1866,6 +1877,10 @@ export const pb = $root.pb = (() => {
                         message.specular = $root.pb.Color.decode(reader, reader.uint32());
                         break;
                     }
+                case 11: {
+                        message.metalness = reader.float();
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -1944,6 +1959,9 @@ export const pb = $root.pb = (() => {
                 if (error)
                     return "specular." + error;
             }
+            if (message.metalness != null && message.hasOwnProperty("metalness"))
+                if (typeof message.metalness !== "number")
+                    return "metalness: number expected";
             return null;
         };
 
@@ -1996,6 +2014,8 @@ export const pb = $root.pb = (() => {
                     throw TypeError(".pb.Material.specular: object expected");
                 message.specular = $root.pb.Color.fromObject(object.specular);
             }
+            if (object.metalness != null)
+                message.metalness = Number(object.metalness);
             return message;
         };
 
@@ -2024,6 +2044,7 @@ export const pb = $root.pb = (() => {
                 object.diffuseMapUv = 0;
                 object.diffuse = null;
                 object.specular = null;
+                object.metalness = 0;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -2049,6 +2070,8 @@ export const pb = $root.pb = (() => {
                 object.diffuse = $root.pb.Color.toObject(message.diffuse, options);
             if (message.specular != null && message.hasOwnProperty("specular"))
                 object.specular = $root.pb.Color.toObject(message.specular, options);
+            if (message.metalness != null && message.hasOwnProperty("metalness"))
+                object.metalness = options.json && !isFinite(message.metalness) ? String(message.metalness) : message.metalness;
             return object;
         };
 
