@@ -587,8 +587,8 @@ export namespace pb {
         /** Asset file */
         file?: (pb.IFile|null);
 
-        /** Asset rbgm */
-        rbgm?: (boolean|null);
+        /** Asset rgbm */
+        rgbm?: (boolean|null);
     }
 
     /** Represents an Asset. */
@@ -606,8 +606,8 @@ export namespace pb {
         /** Asset file. */
         public file?: (pb.IFile|null);
 
-        /** Asset rbgm. */
-        public rbgm: boolean;
+        /** Asset rgbm. */
+        public rgbm: boolean;
 
         /**
          * Creates a new Asset instance using the specified properties.

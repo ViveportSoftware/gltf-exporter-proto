@@ -40,7 +40,7 @@ message File {
 message Asset {
     string name = 1;
     File file   = 2;
-    bool rbgm   = 3;
+    bool rgbm   = 3;
 }
 
 message Material {

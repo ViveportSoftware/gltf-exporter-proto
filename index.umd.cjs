@@ -1390,7 +1390,7 @@ $root.pb = (function() {
          * @interface IAsset
          * @property {string|null} [name] Asset name
          * @property {pb.IFile|null} [file] Asset file
-         * @property {boolean|null} [rbgm] Asset rbgm
+         * @property {boolean|null} [rgbm] Asset rgbm
          */
 
         /**
@@ -1425,12 +1425,12 @@ $root.pb = (function() {
         Asset.prototype.file = null;
 
         /**
-         * Asset rbgm.
-         * @member {boolean} rbgm
+         * Asset rgbm.
+         * @member {boolean} rgbm
          * @memberof pb.Asset
          * @instance
          */
-        Asset.prototype.rbgm = false;
+        Asset.prototype.rgbm = false;
 
         /**
          * Creates a new Asset instance using the specified properties.
@@ -1460,8 +1460,8 @@ $root.pb = (function() {
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
             if (message.file != null && Object.hasOwnProperty.call(message, "file"))
                 $root.pb.File.encode(message.file, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.rbgm != null && Object.hasOwnProperty.call(message, "rbgm"))
-                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.rbgm);
+            if (message.rgbm != null && Object.hasOwnProperty.call(message, "rgbm"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.rgbm);
             return writer;
         };
 
@@ -1505,7 +1505,7 @@ $root.pb = (function() {
                         break;
                     }
                 case 3: {
-                        message.rbgm = reader.bool();
+                        message.rgbm = reader.bool();
                         break;
                     }
                 default:
@@ -1551,9 +1551,9 @@ $root.pb = (function() {
                 if (error)
                     return "file." + error;
             }
-            if (message.rbgm != null && message.hasOwnProperty("rbgm"))
-                if (typeof message.rbgm !== "boolean")
-                    return "rbgm: boolean expected";
+            if (message.rgbm != null && message.hasOwnProperty("rgbm"))
+                if (typeof message.rgbm !== "boolean")
+                    return "rgbm: boolean expected";
             return null;
         };
 
@@ -1576,8 +1576,8 @@ $root.pb = (function() {
                     throw TypeError(".pb.Asset.file: object expected");
                 message.file = $root.pb.File.fromObject(object.file);
             }
-            if (object.rbgm != null)
-                message.rbgm = Boolean(object.rbgm);
+            if (object.rgbm != null)
+                message.rgbm = Boolean(object.rgbm);
             return message;
         };
 
@@ -1597,14 +1597,14 @@ $root.pb = (function() {
             if (options.defaults) {
                 object.name = "";
                 object.file = null;
-                object.rbgm = false;
+                object.rgbm = false;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
             if (message.file != null && message.hasOwnProperty("file"))
                 object.file = $root.pb.File.toObject(message.file, options);
-            if (message.rbgm != null && message.hasOwnProperty("rbgm"))
-                object.rbgm = message.rbgm;
+            if (message.rgbm != null && message.hasOwnProperty("rgbm"))
+                object.rgbm = message.rgbm;
             return object;
         };
 
