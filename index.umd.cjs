@@ -1390,6 +1390,7 @@ $root.pb = (function() {
          * @interface IAsset
          * @property {string|null} [name] Asset name
          * @property {pb.IFile|null} [file] Asset file
+         * @property {boolean|null} [rbgm] Asset rbgm
          */
 
         /**
@@ -1424,6 +1425,14 @@ $root.pb = (function() {
         Asset.prototype.file = null;
 
         /**
+         * Asset rbgm.
+         * @member {boolean} rbgm
+         * @memberof pb.Asset
+         * @instance
+         */
+        Asset.prototype.rbgm = false;
+
+        /**
          * Creates a new Asset instance using the specified properties.
          * @function create
          * @memberof pb.Asset
@@ -1451,6 +1460,8 @@ $root.pb = (function() {
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
             if (message.file != null && Object.hasOwnProperty.call(message, "file"))
                 $root.pb.File.encode(message.file, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.rbgm != null && Object.hasOwnProperty.call(message, "rbgm"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.rbgm);
             return writer;
         };
 
@@ -1491,6 +1502,10 @@ $root.pb = (function() {
                     }
                 case 2: {
                         message.file = $root.pb.File.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 3: {
+                        message.rbgm = reader.bool();
                         break;
                     }
                 default:
@@ -1536,6 +1551,9 @@ $root.pb = (function() {
                 if (error)
                     return "file." + error;
             }
+            if (message.rbgm != null && message.hasOwnProperty("rbgm"))
+                if (typeof message.rbgm !== "boolean")
+                    return "rbgm: boolean expected";
             return null;
         };
 
@@ -1558,6 +1576,8 @@ $root.pb = (function() {
                     throw TypeError(".pb.Asset.file: object expected");
                 message.file = $root.pb.File.fromObject(object.file);
             }
+            if (object.rbgm != null)
+                message.rbgm = Boolean(object.rbgm);
             return message;
         };
 
@@ -1577,11 +1597,14 @@ $root.pb = (function() {
             if (options.defaults) {
                 object.name = "";
                 object.file = null;
+                object.rbgm = false;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
             if (message.file != null && message.hasOwnProperty("file"))
                 object.file = $root.pb.File.toObject(message.file, options);
+            if (message.rbgm != null && message.hasOwnProperty("rbgm"))
+                object.rbgm = message.rbgm;
             return object;
         };
 
