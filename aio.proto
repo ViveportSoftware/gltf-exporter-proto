@@ -55,6 +55,7 @@ message Material {
     Color diffuse             = 9;
     Color specular            = 10;
     float metalness           = 11;
+    bool doubleSided          = 12;
 }
 
 message Mesh {

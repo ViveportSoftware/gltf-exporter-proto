@@ -722,6 +722,9 @@ export namespace pb {
 
         /** Material metalness */
         metalness?: (number|null);
+
+        /** Material doubleSided */
+        doubleSided?: (boolean|null);
     }
 
     /** Represents a Material. */
@@ -765,6 +768,9 @@ export namespace pb {
 
         /** Material metalness. */
         public metalness: number;
+
+        /** Material doubleSided. */
+        public doubleSided: boolean;
 
         /**
          * Creates a new Material instance using the specified properties.

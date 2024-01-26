@@ -1654,6 +1654,7 @@ $root.pb = (function() {
          * @property {pb.IColor|null} [diffuse] Material diffuse
          * @property {pb.IColor|null} [specular] Material specular
          * @property {number|null} [metalness] Material metalness
+         * @property {boolean|null} [doubleSided] Material doubleSided
          */
 
         /**
@@ -1761,6 +1762,14 @@ $root.pb = (function() {
         Material.prototype.metalness = 0;
 
         /**
+         * Material doubleSided.
+         * @member {boolean} doubleSided
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.doubleSided = false;
+
+        /**
          * Creates a new Material instance using the specified properties.
          * @function create
          * @memberof pb.Material
@@ -1809,6 +1818,8 @@ $root.pb = (function() {
                 $root.pb.Color.encode(message.specular, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
             if (message.metalness != null && Object.hasOwnProperty.call(message, "metalness"))
                 writer.uint32(/* id 11, wireType 5 =*/93).float(message.metalness);
+            if (message.doubleSided != null && Object.hasOwnProperty.call(message, "doubleSided"))
+                writer.uint32(/* id 12, wireType 0 =*/96).bool(message.doubleSided);
             return writer;
         };
 
@@ -1906,6 +1917,10 @@ $root.pb = (function() {
                         message.metalness = reader.float();
                         break;
                     }
+                case 12: {
+                        message.doubleSided = reader.bool();
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -1987,6 +2002,9 @@ $root.pb = (function() {
             if (message.metalness != null && message.hasOwnProperty("metalness"))
                 if (typeof message.metalness !== "number")
                     return "metalness: number expected";
+            if (message.doubleSided != null && message.hasOwnProperty("doubleSided"))
+                if (typeof message.doubleSided !== "boolean")
+                    return "doubleSided: boolean expected";
             return null;
         };
 
@@ -2041,6 +2059,8 @@ $root.pb = (function() {
             }
             if (object.metalness != null)
                 message.metalness = Number(object.metalness);
+            if (object.doubleSided != null)
+                message.doubleSided = Boolean(object.doubleSided);
             return message;
         };
 
@@ -2070,6 +2090,7 @@ $root.pb = (function() {
                 object.diffuse = null;
                 object.specular = null;
                 object.metalness = 0;
+                object.doubleSided = false;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -2097,6 +2118,8 @@ $root.pb = (function() {
                 object.specular = $root.pb.Color.toObject(message.specular, options);
             if (message.metalness != null && message.hasOwnProperty("metalness"))
                 object.metalness = options.json && !isFinite(message.metalness) ? String(message.metalness) : message.metalness;
+            if (message.doubleSided != null && message.hasOwnProperty("doubleSided"))
+                object.doubleSided = message.doubleSided;
             return object;
         };
 
