@@ -81,4 +81,5 @@ message Node {
     Quat rotation                       = 5;
     Vec3 scale                          = 6;
     repeated MeshInstance meshInstances = 7;
+    repeated string assetUrl            = 8;
 }

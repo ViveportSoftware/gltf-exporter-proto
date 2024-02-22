@@ -2791,6 +2791,7 @@ export const pb = $root.pb = (() => {
          * @property {pb.IQuat|null} [rotation] Node rotation
          * @property {pb.IVec3|null} [scale] Node scale
          * @property {Array.<pb.IMeshInstance>|null} [meshInstances] Node meshInstances
+         * @property {Array.<string>|null} [assetUrl] Node assetUrl
          */
 
         /**
@@ -2804,6 +2805,7 @@ export const pb = $root.pb = (() => {
         function Node(properties) {
             this.children = [];
             this.meshInstances = [];
+            this.assetUrl = [];
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -2867,6 +2869,14 @@ export const pb = $root.pb = (() => {
         Node.prototype.meshInstances = $util.emptyArray;
 
         /**
+         * Node assetUrl.
+         * @member {Array.<string>} assetUrl
+         * @memberof pb.Node
+         * @instance
+         */
+        Node.prototype.assetUrl = $util.emptyArray;
+
+        /**
          * Creates a new Node instance using the specified properties.
          * @function create
          * @memberof pb.Node
@@ -2906,6 +2916,9 @@ export const pb = $root.pb = (() => {
             if (message.meshInstances != null && message.meshInstances.length)
                 for (let i = 0; i < message.meshInstances.length; ++i)
                     $root.pb.MeshInstance.encode(message.meshInstances[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            if (message.assetUrl != null && message.assetUrl.length)
+                for (let i = 0; i < message.assetUrl.length; ++i)
+                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.assetUrl[i]);
             return writer;
         };
 
@@ -2970,6 +2983,12 @@ export const pb = $root.pb = (() => {
                         if (!(message.meshInstances && message.meshInstances.length))
                             message.meshInstances = [];
                         message.meshInstances.push($root.pb.MeshInstance.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 8: {
+                        if (!(message.assetUrl && message.assetUrl.length))
+                            message.assetUrl = [];
+                        message.assetUrl.push(reader.string());
                         break;
                     }
                 default:
@@ -3046,6 +3065,13 @@ export const pb = $root.pb = (() => {
                         return "meshInstances." + error;
                 }
             }
+            if (message.assetUrl != null && message.hasOwnProperty("assetUrl")) {
+                if (!Array.isArray(message.assetUrl))
+                    return "assetUrl: array expected";
+                for (let i = 0; i < message.assetUrl.length; ++i)
+                    if (!$util.isString(message.assetUrl[i]))
+                        return "assetUrl: string[] expected";
+            }
             return null;
         };
 
@@ -3103,6 +3129,13 @@ export const pb = $root.pb = (() => {
                     message.meshInstances[i] = $root.pb.MeshInstance.fromObject(object.meshInstances[i]);
                 }
             }
+            if (object.assetUrl) {
+                if (!Array.isArray(object.assetUrl))
+                    throw TypeError(".pb.Node.assetUrl: array expected");
+                message.assetUrl = [];
+                for (let i = 0; i < object.assetUrl.length; ++i)
+                    message.assetUrl[i] = String(object.assetUrl[i]);
+            }
             return message;
         };
 
@@ -3122,6 +3155,7 @@ export const pb = $root.pb = (() => {
             if (options.arrays || options.defaults) {
                 object.children = [];
                 object.meshInstances = [];
+                object.assetUrl = [];
             }
             if (options.defaults) {
                 object.name = "";
@@ -3155,6 +3189,11 @@ export const pb = $root.pb = (() => {
                 object.meshInstances = [];
                 for (let j = 0; j < message.meshInstances.length; ++j)
                     object.meshInstances[j] = $root.pb.MeshInstance.toObject(message.meshInstances[j], options);
+            }
+            if (message.assetUrl && message.assetUrl.length) {
+                object.assetUrl = [];
+                for (let j = 0; j < message.assetUrl.length; ++j)
+                    object.assetUrl[j] = message.assetUrl[j];
             }
             return object;
         };

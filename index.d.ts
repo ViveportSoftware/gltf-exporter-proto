@@ -1109,6 +1109,9 @@ export namespace pb {
 
         /** Node meshInstances */
         meshInstances?: (pb.IMeshInstance[]|null);
+
+        /** Node assetUrl */
+        assetUrl?: (string[]|null);
     }
 
     /** Represents a Node. */
@@ -1140,6 +1143,9 @@ export namespace pb {
 
         /** Node meshInstances. */
         public meshInstances: pb.IMeshInstance[];
+
+        /** Node assetUrl. */
+        public assetUrl: string[];
 
         /**
          * Creates a new Node instance using the specified properties.
