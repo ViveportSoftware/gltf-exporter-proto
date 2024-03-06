@@ -18,6 +18,233 @@ $root.pb = (function() {
      */
     var pb = {};
 
+    pb.Vec2 = (function() {
+
+        /**
+         * Properties of a Vec2.
+         * @memberof pb
+         * @interface IVec2
+         * @property {number|null} [x] Vec2 x
+         * @property {number|null} [y] Vec2 y
+         */
+
+        /**
+         * Constructs a new Vec2.
+         * @memberof pb
+         * @classdesc Represents a Vec2.
+         * @implements IVec2
+         * @constructor
+         * @param {pb.IVec2=} [properties] Properties to set
+         */
+        function Vec2(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Vec2 x.
+         * @member {number} x
+         * @memberof pb.Vec2
+         * @instance
+         */
+        Vec2.prototype.x = 0;
+
+        /**
+         * Vec2 y.
+         * @member {number} y
+         * @memberof pb.Vec2
+         * @instance
+         */
+        Vec2.prototype.y = 0;
+
+        /**
+         * Creates a new Vec2 instance using the specified properties.
+         * @function create
+         * @memberof pb.Vec2
+         * @static
+         * @param {pb.IVec2=} [properties] Properties to set
+         * @returns {pb.Vec2} Vec2 instance
+         */
+        Vec2.create = function create(properties) {
+            return new Vec2(properties);
+        };
+
+        /**
+         * Encodes the specified Vec2 message. Does not implicitly {@link pb.Vec2.verify|verify} messages.
+         * @function encode
+         * @memberof pb.Vec2
+         * @static
+         * @param {pb.IVec2} message Vec2 message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Vec2.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                writer.uint32(/* id 1, wireType 5 =*/13).float(message.x);
+            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                writer.uint32(/* id 2, wireType 5 =*/21).float(message.y);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Vec2 message, length delimited. Does not implicitly {@link pb.Vec2.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.Vec2
+         * @static
+         * @param {pb.IVec2} message Vec2 message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Vec2.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Vec2 message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.Vec2
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.Vec2} Vec2
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Vec2.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.Vec2();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.x = reader.float();
+                        break;
+                    }
+                case 2: {
+                        message.y = reader.float();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Vec2 message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.Vec2
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.Vec2} Vec2
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Vec2.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Vec2 message.
+         * @function verify
+         * @memberof pb.Vec2
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Vec2.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.x != null && message.hasOwnProperty("x"))
+                if (typeof message.x !== "number")
+                    return "x: number expected";
+            if (message.y != null && message.hasOwnProperty("y"))
+                if (typeof message.y !== "number")
+                    return "y: number expected";
+            return null;
+        };
+
+        /**
+         * Creates a Vec2 message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.Vec2
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.Vec2} Vec2
+         */
+        Vec2.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.Vec2)
+                return object;
+            var message = new $root.pb.Vec2();
+            if (object.x != null)
+                message.x = Number(object.x);
+            if (object.y != null)
+                message.y = Number(object.y);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Vec2 message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.Vec2
+         * @static
+         * @param {pb.Vec2} message Vec2
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Vec2.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.x = 0;
+                object.y = 0;
+            }
+            if (message.x != null && message.hasOwnProperty("x"))
+                object.x = options.json && !isFinite(message.x) ? String(message.x) : message.x;
+            if (message.y != null && message.hasOwnProperty("y"))
+                object.y = options.json && !isFinite(message.y) ? String(message.y) : message.y;
+            return object;
+        };
+
+        /**
+         * Converts this Vec2 to JSON.
+         * @function toJSON
+         * @memberof pb.Vec2
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Vec2.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for Vec2
+         * @function getTypeUrl
+         * @memberof pb.Vec2
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        Vec2.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/pb.Vec2";
+        };
+
+        return Vec2;
+    })();
+
     pb.Vec3 = (function() {
 
         /**
@@ -1655,6 +1882,21 @@ $root.pb = (function() {
          * @property {pb.IColor|null} [specular] Material specular
          * @property {number|null} [metalness] Material metalness
          * @property {boolean|null} [doubleSided] Material doubleSided
+         * @property {pb.IVec2|null} [diffuseMapOffset] Material diffuseMapOffset
+         * @property {number|null} [diffuseMapRotation] Material diffuseMapRotation
+         * @property {pb.IVec2|null} [diffuseMapTiling] Material diffuseMapTiling
+         * @property {pb.IVec2|null} [emissiveMapOffset] Material emissiveMapOffset
+         * @property {number|null} [emissiveMapRotation] Material emissiveMapRotation
+         * @property {pb.IVec2|null} [emissiveMapTiling] Material emissiveMapTiling
+         * @property {pb.IVec2|null} [aoMapOffset] Material aoMapOffset
+         * @property {number|null} [aoMapRotation] Material aoMapRotation
+         * @property {pb.IVec2|null} [aoMapTiling] Material aoMapTiling
+         * @property {pb.IVec2|null} [normalMapOffset] Material normalMapOffset
+         * @property {number|null} [normalMapRotation] Material normalMapRotation
+         * @property {pb.IVec2|null} [normalMapTiling] Material normalMapTiling
+         * @property {pb.IVec2|null} [metalnessMapOffset] Material metalnessMapOffset
+         * @property {number|null} [metalnessMapRotation] Material metalnessMapRotation
+         * @property {pb.IVec2|null} [metalnessMapTiling] Material metalnessMapTiling
          */
 
         /**
@@ -1770,6 +2012,126 @@ $root.pb = (function() {
         Material.prototype.doubleSided = false;
 
         /**
+         * Material diffuseMapOffset.
+         * @member {pb.IVec2|null|undefined} diffuseMapOffset
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.diffuseMapOffset = null;
+
+        /**
+         * Material diffuseMapRotation.
+         * @member {number} diffuseMapRotation
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.diffuseMapRotation = 0;
+
+        /**
+         * Material diffuseMapTiling.
+         * @member {pb.IVec2|null|undefined} diffuseMapTiling
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.diffuseMapTiling = null;
+
+        /**
+         * Material emissiveMapOffset.
+         * @member {pb.IVec2|null|undefined} emissiveMapOffset
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.emissiveMapOffset = null;
+
+        /**
+         * Material emissiveMapRotation.
+         * @member {number} emissiveMapRotation
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.emissiveMapRotation = 0;
+
+        /**
+         * Material emissiveMapTiling.
+         * @member {pb.IVec2|null|undefined} emissiveMapTiling
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.emissiveMapTiling = null;
+
+        /**
+         * Material aoMapOffset.
+         * @member {pb.IVec2|null|undefined} aoMapOffset
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.aoMapOffset = null;
+
+        /**
+         * Material aoMapRotation.
+         * @member {number} aoMapRotation
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.aoMapRotation = 0;
+
+        /**
+         * Material aoMapTiling.
+         * @member {pb.IVec2|null|undefined} aoMapTiling
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.aoMapTiling = null;
+
+        /**
+         * Material normalMapOffset.
+         * @member {pb.IVec2|null|undefined} normalMapOffset
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.normalMapOffset = null;
+
+        /**
+         * Material normalMapRotation.
+         * @member {number} normalMapRotation
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.normalMapRotation = 0;
+
+        /**
+         * Material normalMapTiling.
+         * @member {pb.IVec2|null|undefined} normalMapTiling
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.normalMapTiling = null;
+
+        /**
+         * Material metalnessMapOffset.
+         * @member {pb.IVec2|null|undefined} metalnessMapOffset
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.metalnessMapOffset = null;
+
+        /**
+         * Material metalnessMapRotation.
+         * @member {number} metalnessMapRotation
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.metalnessMapRotation = 0;
+
+        /**
+         * Material metalnessMapTiling.
+         * @member {pb.IVec2|null|undefined} metalnessMapTiling
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.metalnessMapTiling = null;
+
+        /**
          * Creates a new Material instance using the specified properties.
          * @function create
          * @memberof pb.Material
@@ -1820,6 +2182,36 @@ $root.pb = (function() {
                 writer.uint32(/* id 11, wireType 5 =*/93).float(message.metalness);
             if (message.doubleSided != null && Object.hasOwnProperty.call(message, "doubleSided"))
                 writer.uint32(/* id 12, wireType 0 =*/96).bool(message.doubleSided);
+            if (message.diffuseMapOffset != null && Object.hasOwnProperty.call(message, "diffuseMapOffset"))
+                $root.pb.Vec2.encode(message.diffuseMapOffset, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+            if (message.diffuseMapRotation != null && Object.hasOwnProperty.call(message, "diffuseMapRotation"))
+                writer.uint32(/* id 14, wireType 5 =*/117).float(message.diffuseMapRotation);
+            if (message.diffuseMapTiling != null && Object.hasOwnProperty.call(message, "diffuseMapTiling"))
+                $root.pb.Vec2.encode(message.diffuseMapTiling, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+            if (message.emissiveMapOffset != null && Object.hasOwnProperty.call(message, "emissiveMapOffset"))
+                $root.pb.Vec2.encode(message.emissiveMapOffset, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+            if (message.emissiveMapRotation != null && Object.hasOwnProperty.call(message, "emissiveMapRotation"))
+                writer.uint32(/* id 17, wireType 5 =*/141).float(message.emissiveMapRotation);
+            if (message.emissiveMapTiling != null && Object.hasOwnProperty.call(message, "emissiveMapTiling"))
+                $root.pb.Vec2.encode(message.emissiveMapTiling, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+            if (message.aoMapOffset != null && Object.hasOwnProperty.call(message, "aoMapOffset"))
+                $root.pb.Vec2.encode(message.aoMapOffset, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+            if (message.aoMapRotation != null && Object.hasOwnProperty.call(message, "aoMapRotation"))
+                writer.uint32(/* id 20, wireType 5 =*/165).float(message.aoMapRotation);
+            if (message.aoMapTiling != null && Object.hasOwnProperty.call(message, "aoMapTiling"))
+                $root.pb.Vec2.encode(message.aoMapTiling, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+            if (message.normalMapOffset != null && Object.hasOwnProperty.call(message, "normalMapOffset"))
+                $root.pb.Vec2.encode(message.normalMapOffset, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+            if (message.normalMapRotation != null && Object.hasOwnProperty.call(message, "normalMapRotation"))
+                writer.uint32(/* id 23, wireType 5 =*/189).float(message.normalMapRotation);
+            if (message.normalMapTiling != null && Object.hasOwnProperty.call(message, "normalMapTiling"))
+                $root.pb.Vec2.encode(message.normalMapTiling, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+            if (message.metalnessMapOffset != null && Object.hasOwnProperty.call(message, "metalnessMapOffset"))
+                $root.pb.Vec2.encode(message.metalnessMapOffset, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+            if (message.metalnessMapRotation != null && Object.hasOwnProperty.call(message, "metalnessMapRotation"))
+                writer.uint32(/* id 26, wireType 5 =*/213).float(message.metalnessMapRotation);
+            if (message.metalnessMapTiling != null && Object.hasOwnProperty.call(message, "metalnessMapTiling"))
+                $root.pb.Vec2.encode(message.metalnessMapTiling, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
             return writer;
         };
 
@@ -1921,6 +2313,66 @@ $root.pb = (function() {
                         message.doubleSided = reader.bool();
                         break;
                     }
+                case 13: {
+                        message.diffuseMapOffset = $root.pb.Vec2.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 14: {
+                        message.diffuseMapRotation = reader.float();
+                        break;
+                    }
+                case 15: {
+                        message.diffuseMapTiling = $root.pb.Vec2.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 16: {
+                        message.emissiveMapOffset = $root.pb.Vec2.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 17: {
+                        message.emissiveMapRotation = reader.float();
+                        break;
+                    }
+                case 18: {
+                        message.emissiveMapTiling = $root.pb.Vec2.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 19: {
+                        message.aoMapOffset = $root.pb.Vec2.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 20: {
+                        message.aoMapRotation = reader.float();
+                        break;
+                    }
+                case 21: {
+                        message.aoMapTiling = $root.pb.Vec2.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 22: {
+                        message.normalMapOffset = $root.pb.Vec2.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 23: {
+                        message.normalMapRotation = reader.float();
+                        break;
+                    }
+                case 24: {
+                        message.normalMapTiling = $root.pb.Vec2.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 25: {
+                        message.metalnessMapOffset = $root.pb.Vec2.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 26: {
+                        message.metalnessMapRotation = reader.float();
+                        break;
+                    }
+                case 27: {
+                        message.metalnessMapTiling = $root.pb.Vec2.decode(reader, reader.uint32());
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -2005,6 +2457,71 @@ $root.pb = (function() {
             if (message.doubleSided != null && message.hasOwnProperty("doubleSided"))
                 if (typeof message.doubleSided !== "boolean")
                     return "doubleSided: boolean expected";
+            if (message.diffuseMapOffset != null && message.hasOwnProperty("diffuseMapOffset")) {
+                var error = $root.pb.Vec2.verify(message.diffuseMapOffset);
+                if (error)
+                    return "diffuseMapOffset." + error;
+            }
+            if (message.diffuseMapRotation != null && message.hasOwnProperty("diffuseMapRotation"))
+                if (typeof message.diffuseMapRotation !== "number")
+                    return "diffuseMapRotation: number expected";
+            if (message.diffuseMapTiling != null && message.hasOwnProperty("diffuseMapTiling")) {
+                var error = $root.pb.Vec2.verify(message.diffuseMapTiling);
+                if (error)
+                    return "diffuseMapTiling." + error;
+            }
+            if (message.emissiveMapOffset != null && message.hasOwnProperty("emissiveMapOffset")) {
+                var error = $root.pb.Vec2.verify(message.emissiveMapOffset);
+                if (error)
+                    return "emissiveMapOffset." + error;
+            }
+            if (message.emissiveMapRotation != null && message.hasOwnProperty("emissiveMapRotation"))
+                if (typeof message.emissiveMapRotation !== "number")
+                    return "emissiveMapRotation: number expected";
+            if (message.emissiveMapTiling != null && message.hasOwnProperty("emissiveMapTiling")) {
+                var error = $root.pb.Vec2.verify(message.emissiveMapTiling);
+                if (error)
+                    return "emissiveMapTiling." + error;
+            }
+            if (message.aoMapOffset != null && message.hasOwnProperty("aoMapOffset")) {
+                var error = $root.pb.Vec2.verify(message.aoMapOffset);
+                if (error)
+                    return "aoMapOffset." + error;
+            }
+            if (message.aoMapRotation != null && message.hasOwnProperty("aoMapRotation"))
+                if (typeof message.aoMapRotation !== "number")
+                    return "aoMapRotation: number expected";
+            if (message.aoMapTiling != null && message.hasOwnProperty("aoMapTiling")) {
+                var error = $root.pb.Vec2.verify(message.aoMapTiling);
+                if (error)
+                    return "aoMapTiling." + error;
+            }
+            if (message.normalMapOffset != null && message.hasOwnProperty("normalMapOffset")) {
+                var error = $root.pb.Vec2.verify(message.normalMapOffset);
+                if (error)
+                    return "normalMapOffset." + error;
+            }
+            if (message.normalMapRotation != null && message.hasOwnProperty("normalMapRotation"))
+                if (typeof message.normalMapRotation !== "number")
+                    return "normalMapRotation: number expected";
+            if (message.normalMapTiling != null && message.hasOwnProperty("normalMapTiling")) {
+                var error = $root.pb.Vec2.verify(message.normalMapTiling);
+                if (error)
+                    return "normalMapTiling." + error;
+            }
+            if (message.metalnessMapOffset != null && message.hasOwnProperty("metalnessMapOffset")) {
+                var error = $root.pb.Vec2.verify(message.metalnessMapOffset);
+                if (error)
+                    return "metalnessMapOffset." + error;
+            }
+            if (message.metalnessMapRotation != null && message.hasOwnProperty("metalnessMapRotation"))
+                if (typeof message.metalnessMapRotation !== "number")
+                    return "metalnessMapRotation: number expected";
+            if (message.metalnessMapTiling != null && message.hasOwnProperty("metalnessMapTiling")) {
+                var error = $root.pb.Vec2.verify(message.metalnessMapTiling);
+                if (error)
+                    return "metalnessMapTiling." + error;
+            }
             return null;
         };
 
@@ -2061,6 +2578,66 @@ $root.pb = (function() {
                 message.metalness = Number(object.metalness);
             if (object.doubleSided != null)
                 message.doubleSided = Boolean(object.doubleSided);
+            if (object.diffuseMapOffset != null) {
+                if (typeof object.diffuseMapOffset !== "object")
+                    throw TypeError(".pb.Material.diffuseMapOffset: object expected");
+                message.diffuseMapOffset = $root.pb.Vec2.fromObject(object.diffuseMapOffset);
+            }
+            if (object.diffuseMapRotation != null)
+                message.diffuseMapRotation = Number(object.diffuseMapRotation);
+            if (object.diffuseMapTiling != null) {
+                if (typeof object.diffuseMapTiling !== "object")
+                    throw TypeError(".pb.Material.diffuseMapTiling: object expected");
+                message.diffuseMapTiling = $root.pb.Vec2.fromObject(object.diffuseMapTiling);
+            }
+            if (object.emissiveMapOffset != null) {
+                if (typeof object.emissiveMapOffset !== "object")
+                    throw TypeError(".pb.Material.emissiveMapOffset: object expected");
+                message.emissiveMapOffset = $root.pb.Vec2.fromObject(object.emissiveMapOffset);
+            }
+            if (object.emissiveMapRotation != null)
+                message.emissiveMapRotation = Number(object.emissiveMapRotation);
+            if (object.emissiveMapTiling != null) {
+                if (typeof object.emissiveMapTiling !== "object")
+                    throw TypeError(".pb.Material.emissiveMapTiling: object expected");
+                message.emissiveMapTiling = $root.pb.Vec2.fromObject(object.emissiveMapTiling);
+            }
+            if (object.aoMapOffset != null) {
+                if (typeof object.aoMapOffset !== "object")
+                    throw TypeError(".pb.Material.aoMapOffset: object expected");
+                message.aoMapOffset = $root.pb.Vec2.fromObject(object.aoMapOffset);
+            }
+            if (object.aoMapRotation != null)
+                message.aoMapRotation = Number(object.aoMapRotation);
+            if (object.aoMapTiling != null) {
+                if (typeof object.aoMapTiling !== "object")
+                    throw TypeError(".pb.Material.aoMapTiling: object expected");
+                message.aoMapTiling = $root.pb.Vec2.fromObject(object.aoMapTiling);
+            }
+            if (object.normalMapOffset != null) {
+                if (typeof object.normalMapOffset !== "object")
+                    throw TypeError(".pb.Material.normalMapOffset: object expected");
+                message.normalMapOffset = $root.pb.Vec2.fromObject(object.normalMapOffset);
+            }
+            if (object.normalMapRotation != null)
+                message.normalMapRotation = Number(object.normalMapRotation);
+            if (object.normalMapTiling != null) {
+                if (typeof object.normalMapTiling !== "object")
+                    throw TypeError(".pb.Material.normalMapTiling: object expected");
+                message.normalMapTiling = $root.pb.Vec2.fromObject(object.normalMapTiling);
+            }
+            if (object.metalnessMapOffset != null) {
+                if (typeof object.metalnessMapOffset !== "object")
+                    throw TypeError(".pb.Material.metalnessMapOffset: object expected");
+                message.metalnessMapOffset = $root.pb.Vec2.fromObject(object.metalnessMapOffset);
+            }
+            if (object.metalnessMapRotation != null)
+                message.metalnessMapRotation = Number(object.metalnessMapRotation);
+            if (object.metalnessMapTiling != null) {
+                if (typeof object.metalnessMapTiling !== "object")
+                    throw TypeError(".pb.Material.metalnessMapTiling: object expected");
+                message.metalnessMapTiling = $root.pb.Vec2.fromObject(object.metalnessMapTiling);
+            }
             return message;
         };
 
@@ -2091,6 +2668,21 @@ $root.pb = (function() {
                 object.specular = null;
                 object.metalness = 0;
                 object.doubleSided = false;
+                object.diffuseMapOffset = null;
+                object.diffuseMapRotation = 0;
+                object.diffuseMapTiling = null;
+                object.emissiveMapOffset = null;
+                object.emissiveMapRotation = 0;
+                object.emissiveMapTiling = null;
+                object.aoMapOffset = null;
+                object.aoMapRotation = 0;
+                object.aoMapTiling = null;
+                object.normalMapOffset = null;
+                object.normalMapRotation = 0;
+                object.normalMapTiling = null;
+                object.metalnessMapOffset = null;
+                object.metalnessMapRotation = 0;
+                object.metalnessMapTiling = null;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -2120,6 +2712,36 @@ $root.pb = (function() {
                 object.metalness = options.json && !isFinite(message.metalness) ? String(message.metalness) : message.metalness;
             if (message.doubleSided != null && message.hasOwnProperty("doubleSided"))
                 object.doubleSided = message.doubleSided;
+            if (message.diffuseMapOffset != null && message.hasOwnProperty("diffuseMapOffset"))
+                object.diffuseMapOffset = $root.pb.Vec2.toObject(message.diffuseMapOffset, options);
+            if (message.diffuseMapRotation != null && message.hasOwnProperty("diffuseMapRotation"))
+                object.diffuseMapRotation = options.json && !isFinite(message.diffuseMapRotation) ? String(message.diffuseMapRotation) : message.diffuseMapRotation;
+            if (message.diffuseMapTiling != null && message.hasOwnProperty("diffuseMapTiling"))
+                object.diffuseMapTiling = $root.pb.Vec2.toObject(message.diffuseMapTiling, options);
+            if (message.emissiveMapOffset != null && message.hasOwnProperty("emissiveMapOffset"))
+                object.emissiveMapOffset = $root.pb.Vec2.toObject(message.emissiveMapOffset, options);
+            if (message.emissiveMapRotation != null && message.hasOwnProperty("emissiveMapRotation"))
+                object.emissiveMapRotation = options.json && !isFinite(message.emissiveMapRotation) ? String(message.emissiveMapRotation) : message.emissiveMapRotation;
+            if (message.emissiveMapTiling != null && message.hasOwnProperty("emissiveMapTiling"))
+                object.emissiveMapTiling = $root.pb.Vec2.toObject(message.emissiveMapTiling, options);
+            if (message.aoMapOffset != null && message.hasOwnProperty("aoMapOffset"))
+                object.aoMapOffset = $root.pb.Vec2.toObject(message.aoMapOffset, options);
+            if (message.aoMapRotation != null && message.hasOwnProperty("aoMapRotation"))
+                object.aoMapRotation = options.json && !isFinite(message.aoMapRotation) ? String(message.aoMapRotation) : message.aoMapRotation;
+            if (message.aoMapTiling != null && message.hasOwnProperty("aoMapTiling"))
+                object.aoMapTiling = $root.pb.Vec2.toObject(message.aoMapTiling, options);
+            if (message.normalMapOffset != null && message.hasOwnProperty("normalMapOffset"))
+                object.normalMapOffset = $root.pb.Vec2.toObject(message.normalMapOffset, options);
+            if (message.normalMapRotation != null && message.hasOwnProperty("normalMapRotation"))
+                object.normalMapRotation = options.json && !isFinite(message.normalMapRotation) ? String(message.normalMapRotation) : message.normalMapRotation;
+            if (message.normalMapTiling != null && message.hasOwnProperty("normalMapTiling"))
+                object.normalMapTiling = $root.pb.Vec2.toObject(message.normalMapTiling, options);
+            if (message.metalnessMapOffset != null && message.hasOwnProperty("metalnessMapOffset"))
+                object.metalnessMapOffset = $root.pb.Vec2.toObject(message.metalnessMapOffset, options);
+            if (message.metalnessMapRotation != null && message.hasOwnProperty("metalnessMapRotation"))
+                object.metalnessMapRotation = options.json && !isFinite(message.metalnessMapRotation) ? String(message.metalnessMapRotation) : message.metalnessMapRotation;
+            if (message.metalnessMapTiling != null && message.hasOwnProperty("metalnessMapTiling"))
+                object.metalnessMapTiling = $root.pb.Vec2.toObject(message.metalnessMapTiling, options);
             return object;
         };
 

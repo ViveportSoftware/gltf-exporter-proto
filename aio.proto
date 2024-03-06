@@ -2,6 +2,11 @@ syntax = "proto3";
 
 package pb;
 
+message Vec2 {
+    float x = 1;
+    float y = 2;
+}
+
 message Vec3 {
     float x = 1;
     float y = 2;
@@ -44,18 +49,33 @@ message Asset {
 }
 
 message Material {
-    string name               = 1;
-    map<string, Asset> assets = 2;
-    Color emissive            = 3;
-    string lightMapChannel    = 4;
-    int32 lightMapUv          = 5;
-    bool useMetalness         = 6;
-    int32 aoMapUv             = 7;
-    int32 diffuseMapUv        = 8;
-    Color diffuse             = 9;
-    Color specular            = 10;
-    float metalness           = 11;
-    bool doubleSided          = 12;
+    string name                = 1;
+    map<string, Asset> assets  = 2;
+    Color emissive             = 3;
+    string lightMapChannel     = 4;
+    int32 lightMapUv           = 5;
+    bool useMetalness          = 6;
+    int32 aoMapUv              = 7;
+    int32 diffuseMapUv         = 8;
+    Color diffuse              = 9;
+    Color specular             = 10;
+    float metalness            = 11;
+    bool doubleSided           = 12;
+    Vec2 diffuseMapOffset      = 13;
+    float diffuseMapRotation   = 14;
+    Vec2 diffuseMapTiling      = 15;
+    Vec2 emissiveMapOffset     = 16;
+    float emissiveMapRotation  = 17;
+    Vec2 emissiveMapTiling     = 18;
+    Vec2 aoMapOffset           = 19;
+    float aoMapRotation        = 20;
+    Vec2 aoMapTiling           = 21;
+    Vec2 normalMapOffset       = 22;
+    float normalMapRotation    = 23;
+    Vec2 normalMapTiling       = 24;
+    Vec2 metalnessMapOffset    = 25;
+    float metalnessMapRotation = 26;
+    Vec2 metalnessMapTiling    = 27;
 }
 
 message Mesh {

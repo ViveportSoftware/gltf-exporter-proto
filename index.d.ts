@@ -3,6 +3,109 @@ import Long = require("long");
 /** Namespace pb. */
 export namespace pb {
 
+    /** Properties of a Vec2. */
+    interface IVec2 {
+
+        /** Vec2 x */
+        x?: (number|null);
+
+        /** Vec2 y */
+        y?: (number|null);
+    }
+
+    /** Represents a Vec2. */
+    class Vec2 implements IVec2 {
+
+        /**
+         * Constructs a new Vec2.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IVec2);
+
+        /** Vec2 x. */
+        public x: number;
+
+        /** Vec2 y. */
+        public y: number;
+
+        /**
+         * Creates a new Vec2 instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns Vec2 instance
+         */
+        public static create(properties?: pb.IVec2): pb.Vec2;
+
+        /**
+         * Encodes the specified Vec2 message. Does not implicitly {@link pb.Vec2.verify|verify} messages.
+         * @param message Vec2 message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IVec2, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified Vec2 message, length delimited. Does not implicitly {@link pb.Vec2.verify|verify} messages.
+         * @param message Vec2 message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IVec2, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a Vec2 message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Vec2
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.Vec2;
+
+        /**
+         * Decodes a Vec2 message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns Vec2
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.Vec2;
+
+        /**
+         * Verifies a Vec2 message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a Vec2 message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns Vec2
+         */
+        public static fromObject(object: { [k: string]: any }): pb.Vec2;
+
+        /**
+         * Creates a plain object from a Vec2 message. Also converts values to other types if specified.
+         * @param message Vec2
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.Vec2, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Vec2 to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for Vec2
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
     /** Properties of a Vec3. */
     interface IVec3 {
 
@@ -725,6 +828,51 @@ export namespace pb {
 
         /** Material doubleSided */
         doubleSided?: (boolean|null);
+
+        /** Material diffuseMapOffset */
+        diffuseMapOffset?: (pb.IVec2|null);
+
+        /** Material diffuseMapRotation */
+        diffuseMapRotation?: (number|null);
+
+        /** Material diffuseMapTiling */
+        diffuseMapTiling?: (pb.IVec2|null);
+
+        /** Material emissiveMapOffset */
+        emissiveMapOffset?: (pb.IVec2|null);
+
+        /** Material emissiveMapRotation */
+        emissiveMapRotation?: (number|null);
+
+        /** Material emissiveMapTiling */
+        emissiveMapTiling?: (pb.IVec2|null);
+
+        /** Material aoMapOffset */
+        aoMapOffset?: (pb.IVec2|null);
+
+        /** Material aoMapRotation */
+        aoMapRotation?: (number|null);
+
+        /** Material aoMapTiling */
+        aoMapTiling?: (pb.IVec2|null);
+
+        /** Material normalMapOffset */
+        normalMapOffset?: (pb.IVec2|null);
+
+        /** Material normalMapRotation */
+        normalMapRotation?: (number|null);
+
+        /** Material normalMapTiling */
+        normalMapTiling?: (pb.IVec2|null);
+
+        /** Material metalnessMapOffset */
+        metalnessMapOffset?: (pb.IVec2|null);
+
+        /** Material metalnessMapRotation */
+        metalnessMapRotation?: (number|null);
+
+        /** Material metalnessMapTiling */
+        metalnessMapTiling?: (pb.IVec2|null);
     }
 
     /** Represents a Material. */
@@ -771,6 +919,51 @@ export namespace pb {
 
         /** Material doubleSided. */
         public doubleSided: boolean;
+
+        /** Material diffuseMapOffset. */
+        public diffuseMapOffset?: (pb.IVec2|null);
+
+        /** Material diffuseMapRotation. */
+        public diffuseMapRotation: number;
+
+        /** Material diffuseMapTiling. */
+        public diffuseMapTiling?: (pb.IVec2|null);
+
+        /** Material emissiveMapOffset. */
+        public emissiveMapOffset?: (pb.IVec2|null);
+
+        /** Material emissiveMapRotation. */
+        public emissiveMapRotation: number;
+
+        /** Material emissiveMapTiling. */
+        public emissiveMapTiling?: (pb.IVec2|null);
+
+        /** Material aoMapOffset. */
+        public aoMapOffset?: (pb.IVec2|null);
+
+        /** Material aoMapRotation. */
+        public aoMapRotation: number;
+
+        /** Material aoMapTiling. */
+        public aoMapTiling?: (pb.IVec2|null);
+
+        /** Material normalMapOffset. */
+        public normalMapOffset?: (pb.IVec2|null);
+
+        /** Material normalMapRotation. */
+        public normalMapRotation: number;
+
+        /** Material normalMapTiling. */
+        public normalMapTiling?: (pb.IVec2|null);
+
+        /** Material metalnessMapOffset. */
+        public metalnessMapOffset?: (pb.IVec2|null);
+
+        /** Material metalnessMapRotation. */
+        public metalnessMapRotation: number;
+
+        /** Material metalnessMapTiling. */
+        public metalnessMapTiling?: (pb.IVec2|null);
 
         /**
          * Creates a new Material instance using the specified properties.
