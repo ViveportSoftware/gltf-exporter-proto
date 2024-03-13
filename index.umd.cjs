@@ -1897,7 +1897,7 @@ $root.pb = (function() {
          * @property {pb.IVec2|null} [metalnessMapOffset] Material metalnessMapOffset
          * @property {number|null} [metalnessMapRotation] Material metalnessMapRotation
          * @property {pb.IVec2|null} [metalnessMapTiling] Material metalnessMapTiling
-         * @property {number|null} [gloness] Material gloness
+         * @property {number|null} [gloss] Material gloss
          */
 
         /**
@@ -2133,12 +2133,12 @@ $root.pb = (function() {
         Material.prototype.metalnessMapTiling = null;
 
         /**
-         * Material gloness.
-         * @member {number} gloness
+         * Material gloss.
+         * @member {number} gloss
          * @memberof pb.Material
          * @instance
          */
-        Material.prototype.gloness = 0;
+        Material.prototype.gloss = 0;
 
         /**
          * Creates a new Material instance using the specified properties.
@@ -2221,8 +2221,8 @@ $root.pb = (function() {
                 writer.uint32(/* id 26, wireType 5 =*/213).float(message.metalnessMapRotation);
             if (message.metalnessMapTiling != null && Object.hasOwnProperty.call(message, "metalnessMapTiling"))
                 $root.pb.Vec2.encode(message.metalnessMapTiling, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
-            if (message.gloness != null && Object.hasOwnProperty.call(message, "gloness"))
-                writer.uint32(/* id 28, wireType 5 =*/229).float(message.gloness);
+            if (message.gloss != null && Object.hasOwnProperty.call(message, "gloss"))
+                writer.uint32(/* id 28, wireType 5 =*/229).float(message.gloss);
             return writer;
         };
 
@@ -2385,7 +2385,7 @@ $root.pb = (function() {
                         break;
                     }
                 case 28: {
-                        message.gloness = reader.float();
+                        message.gloss = reader.float();
                         break;
                     }
                 default:
@@ -2537,9 +2537,9 @@ $root.pb = (function() {
                 if (error)
                     return "metalnessMapTiling." + error;
             }
-            if (message.gloness != null && message.hasOwnProperty("gloness"))
-                if (typeof message.gloness !== "number")
-                    return "gloness: number expected";
+            if (message.gloss != null && message.hasOwnProperty("gloss"))
+                if (typeof message.gloss !== "number")
+                    return "gloss: number expected";
             return null;
         };
 
@@ -2656,8 +2656,8 @@ $root.pb = (function() {
                     throw TypeError(".pb.Material.metalnessMapTiling: object expected");
                 message.metalnessMapTiling = $root.pb.Vec2.fromObject(object.metalnessMapTiling);
             }
-            if (object.gloness != null)
-                message.gloness = Number(object.gloness);
+            if (object.gloss != null)
+                message.gloss = Number(object.gloss);
             return message;
         };
 
@@ -2703,7 +2703,7 @@ $root.pb = (function() {
                 object.metalnessMapOffset = null;
                 object.metalnessMapRotation = 0;
                 object.metalnessMapTiling = null;
-                object.gloness = 0;
+                object.gloss = 0;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -2763,8 +2763,8 @@ $root.pb = (function() {
                 object.metalnessMapRotation = options.json && !isFinite(message.metalnessMapRotation) ? String(message.metalnessMapRotation) : message.metalnessMapRotation;
             if (message.metalnessMapTiling != null && message.hasOwnProperty("metalnessMapTiling"))
                 object.metalnessMapTiling = $root.pb.Vec2.toObject(message.metalnessMapTiling, options);
-            if (message.gloness != null && message.hasOwnProperty("gloness"))
-                object.gloness = options.json && !isFinite(message.gloness) ? String(message.gloness) : message.gloness;
+            if (message.gloss != null && message.hasOwnProperty("gloss"))
+                object.gloss = options.json && !isFinite(message.gloss) ? String(message.gloss) : message.gloss;
             return object;
         };
 

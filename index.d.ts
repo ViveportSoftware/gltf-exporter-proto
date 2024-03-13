@@ -874,8 +874,8 @@ export namespace pb {
         /** Material metalnessMapTiling */
         metalnessMapTiling?: (pb.IVec2|null);
 
-        /** Material gloness */
-        gloness?: (number|null);
+        /** Material gloss */
+        gloss?: (number|null);
     }
 
     /** Represents a Material. */
@@ -968,8 +968,8 @@ export namespace pb {
         /** Material metalnessMapTiling. */
         public metalnessMapTiling?: (pb.IVec2|null);
 
-        /** Material gloness. */
-        public gloness: number;
+        /** Material gloss. */
+        public gloss: number;
 
         /**
          * Creates a new Material instance using the specified properties.
