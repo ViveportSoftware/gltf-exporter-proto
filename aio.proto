@@ -76,6 +76,7 @@ message Material {
     Vec2 metalnessMapOffset    = 25;
     float metalnessMapRotation = 26;
     Vec2 metalnessMapTiling    = 27;
+    float gloness              = 28;
 }
 
 message Mesh {
