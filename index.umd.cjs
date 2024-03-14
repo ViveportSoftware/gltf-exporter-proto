@@ -1898,6 +1898,9 @@ $root.pb = (function() {
          * @property {number|null} [metalnessMapRotation] Material metalnessMapRotation
          * @property {pb.IVec2|null} [metalnessMapTiling] Material metalnessMapTiling
          * @property {number|null} [gloss] Material gloss
+         * @property {string|null} [glossMapChannel] Material glossMapChannel
+         * @property {string|null} [metalnessMapChannel] Material metalnessMapChannel
+         * @property {string|null} [specularMapChannel] Material specularMapChannel
          */
 
         /**
@@ -2141,6 +2144,30 @@ $root.pb = (function() {
         Material.prototype.gloss = 0;
 
         /**
+         * Material glossMapChannel.
+         * @member {string} glossMapChannel
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.glossMapChannel = "";
+
+        /**
+         * Material metalnessMapChannel.
+         * @member {string} metalnessMapChannel
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.metalnessMapChannel = "";
+
+        /**
+         * Material specularMapChannel.
+         * @member {string} specularMapChannel
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.specularMapChannel = "";
+
+        /**
          * Creates a new Material instance using the specified properties.
          * @function create
          * @memberof pb.Material
@@ -2223,6 +2250,12 @@ $root.pb = (function() {
                 $root.pb.Vec2.encode(message.metalnessMapTiling, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
             if (message.gloss != null && Object.hasOwnProperty.call(message, "gloss"))
                 writer.uint32(/* id 28, wireType 5 =*/229).float(message.gloss);
+            if (message.glossMapChannel != null && Object.hasOwnProperty.call(message, "glossMapChannel"))
+                writer.uint32(/* id 29, wireType 2 =*/234).string(message.glossMapChannel);
+            if (message.metalnessMapChannel != null && Object.hasOwnProperty.call(message, "metalnessMapChannel"))
+                writer.uint32(/* id 30, wireType 2 =*/242).string(message.metalnessMapChannel);
+            if (message.specularMapChannel != null && Object.hasOwnProperty.call(message, "specularMapChannel"))
+                writer.uint32(/* id 31, wireType 2 =*/250).string(message.specularMapChannel);
             return writer;
         };
 
@@ -2388,6 +2421,18 @@ $root.pb = (function() {
                         message.gloss = reader.float();
                         break;
                     }
+                case 29: {
+                        message.glossMapChannel = reader.string();
+                        break;
+                    }
+                case 30: {
+                        message.metalnessMapChannel = reader.string();
+                        break;
+                    }
+                case 31: {
+                        message.specularMapChannel = reader.string();
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -2540,6 +2585,15 @@ $root.pb = (function() {
             if (message.gloss != null && message.hasOwnProperty("gloss"))
                 if (typeof message.gloss !== "number")
                     return "gloss: number expected";
+            if (message.glossMapChannel != null && message.hasOwnProperty("glossMapChannel"))
+                if (!$util.isString(message.glossMapChannel))
+                    return "glossMapChannel: string expected";
+            if (message.metalnessMapChannel != null && message.hasOwnProperty("metalnessMapChannel"))
+                if (!$util.isString(message.metalnessMapChannel))
+                    return "metalnessMapChannel: string expected";
+            if (message.specularMapChannel != null && message.hasOwnProperty("specularMapChannel"))
+                if (!$util.isString(message.specularMapChannel))
+                    return "specularMapChannel: string expected";
             return null;
         };
 
@@ -2658,6 +2712,12 @@ $root.pb = (function() {
             }
             if (object.gloss != null)
                 message.gloss = Number(object.gloss);
+            if (object.glossMapChannel != null)
+                message.glossMapChannel = String(object.glossMapChannel);
+            if (object.metalnessMapChannel != null)
+                message.metalnessMapChannel = String(object.metalnessMapChannel);
+            if (object.specularMapChannel != null)
+                message.specularMapChannel = String(object.specularMapChannel);
             return message;
         };
 
@@ -2704,6 +2764,9 @@ $root.pb = (function() {
                 object.metalnessMapRotation = 0;
                 object.metalnessMapTiling = null;
                 object.gloss = 0;
+                object.glossMapChannel = "";
+                object.metalnessMapChannel = "";
+                object.specularMapChannel = "";
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -2765,6 +2828,12 @@ $root.pb = (function() {
                 object.metalnessMapTiling = $root.pb.Vec2.toObject(message.metalnessMapTiling, options);
             if (message.gloss != null && message.hasOwnProperty("gloss"))
                 object.gloss = options.json && !isFinite(message.gloss) ? String(message.gloss) : message.gloss;
+            if (message.glossMapChannel != null && message.hasOwnProperty("glossMapChannel"))
+                object.glossMapChannel = message.glossMapChannel;
+            if (message.metalnessMapChannel != null && message.hasOwnProperty("metalnessMapChannel"))
+                object.metalnessMapChannel = message.metalnessMapChannel;
+            if (message.specularMapChannel != null && message.hasOwnProperty("specularMapChannel"))
+                object.specularMapChannel = message.specularMapChannel;
             return object;
         };
 

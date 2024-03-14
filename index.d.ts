@@ -876,6 +876,15 @@ export namespace pb {
 
         /** Material gloss */
         gloss?: (number|null);
+
+        /** Material glossMapChannel */
+        glossMapChannel?: (string|null);
+
+        /** Material metalnessMapChannel */
+        metalnessMapChannel?: (string|null);
+
+        /** Material specularMapChannel */
+        specularMapChannel?: (string|null);
     }
 
     /** Represents a Material. */
@@ -970,6 +979,15 @@ export namespace pb {
 
         /** Material gloss. */
         public gloss: number;
+
+        /** Material glossMapChannel. */
+        public glossMapChannel: string;
+
+        /** Material metalnessMapChannel. */
+        public metalnessMapChannel: string;
+
+        /** Material specularMapChannel. */
+        public specularMapChannel: string;
 
         /**
          * Creates a new Material instance using the specified properties.

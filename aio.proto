@@ -77,6 +77,9 @@ message Material {
     float metalnessMapRotation = 26;
     Vec2 metalnessMapTiling    = 27;
     float gloss                = 28;
+    string glossMapChannel     = 29;
+    string metalnessMapChannel = 30;
+    string specularMapChannel  = 31;
 }
 
 message Mesh {
