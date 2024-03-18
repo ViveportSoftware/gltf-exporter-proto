@@ -1901,6 +1901,7 @@ $root.pb = (function() {
          * @property {string|null} [glossMapChannel] Material glossMapChannel
          * @property {string|null} [metalnessMapChannel] Material metalnessMapChannel
          * @property {string|null} [specularMapChannel] Material specularMapChannel
+         * @property {boolean|null} [glossInvert] Material glossInvert
          */
 
         /**
@@ -2168,6 +2169,14 @@ $root.pb = (function() {
         Material.prototype.specularMapChannel = "";
 
         /**
+         * Material glossInvert.
+         * @member {boolean} glossInvert
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.glossInvert = false;
+
+        /**
          * Creates a new Material instance using the specified properties.
          * @function create
          * @memberof pb.Material
@@ -2256,6 +2265,8 @@ $root.pb = (function() {
                 writer.uint32(/* id 30, wireType 2 =*/242).string(message.metalnessMapChannel);
             if (message.specularMapChannel != null && Object.hasOwnProperty.call(message, "specularMapChannel"))
                 writer.uint32(/* id 31, wireType 2 =*/250).string(message.specularMapChannel);
+            if (message.glossInvert != null && Object.hasOwnProperty.call(message, "glossInvert"))
+                writer.uint32(/* id 32, wireType 0 =*/256).bool(message.glossInvert);
             return writer;
         };
 
@@ -2433,6 +2444,10 @@ $root.pb = (function() {
                         message.specularMapChannel = reader.string();
                         break;
                     }
+                case 32: {
+                        message.glossInvert = reader.bool();
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -2594,6 +2609,9 @@ $root.pb = (function() {
             if (message.specularMapChannel != null && message.hasOwnProperty("specularMapChannel"))
                 if (!$util.isString(message.specularMapChannel))
                     return "specularMapChannel: string expected";
+            if (message.glossInvert != null && message.hasOwnProperty("glossInvert"))
+                if (typeof message.glossInvert !== "boolean")
+                    return "glossInvert: boolean expected";
             return null;
         };
 
@@ -2718,6 +2736,8 @@ $root.pb = (function() {
                 message.metalnessMapChannel = String(object.metalnessMapChannel);
             if (object.specularMapChannel != null)
                 message.specularMapChannel = String(object.specularMapChannel);
+            if (object.glossInvert != null)
+                message.glossInvert = Boolean(object.glossInvert);
             return message;
         };
 
@@ -2767,6 +2787,7 @@ $root.pb = (function() {
                 object.glossMapChannel = "";
                 object.metalnessMapChannel = "";
                 object.specularMapChannel = "";
+                object.glossInvert = false;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -2834,6 +2855,8 @@ $root.pb = (function() {
                 object.metalnessMapChannel = message.metalnessMapChannel;
             if (message.specularMapChannel != null && message.hasOwnProperty("specularMapChannel"))
                 object.specularMapChannel = message.specularMapChannel;
+            if (message.glossInvert != null && message.hasOwnProperty("glossInvert"))
+                object.glossInvert = message.glossInvert;
             return object;
         };
 

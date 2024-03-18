@@ -885,6 +885,9 @@ export namespace pb {
 
         /** Material specularMapChannel */
         specularMapChannel?: (string|null);
+
+        /** Material glossInvert */
+        glossInvert?: (boolean|null);
     }
 
     /** Represents a Material. */
@@ -988,6 +991,9 @@ export namespace pb {
 
         /** Material specularMapChannel. */
         public specularMapChannel: string;
+
+        /** Material glossInvert. */
+        public glossInvert: boolean;
 
         /**
          * Creates a new Material instance using the specified properties.
