@@ -93,9 +93,9 @@ message Mesh {
 }
 
 message MeshInstance {
-    Mesh mesh                      = 1;
-    Material material              = 2;
-    bytes lightMapperTextureBuffer = 3;
+    Mesh mesh                                   = 1;
+    Material material                           = 2;
+    map<string, bytes> lightMapperTextureBuffer = 3;
 }
 
 message Node {

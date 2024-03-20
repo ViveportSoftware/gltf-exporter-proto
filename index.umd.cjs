@@ -3256,7 +3256,7 @@ $root.pb = (function() {
          * @interface IMeshInstance
          * @property {pb.IMesh|null} [mesh] MeshInstance mesh
          * @property {pb.IMaterial|null} [material] MeshInstance material
-         * @property {Uint8Array|null} [lightMapperTextureBuffer] MeshInstance lightMapperTextureBuffer
+         * @property {Object.<string,Uint8Array>|null} [lightMapperTextureBuffer] MeshInstance lightMapperTextureBuffer
          */
 
         /**
@@ -3268,6 +3268,7 @@ $root.pb = (function() {
          * @param {pb.IMeshInstance=} [properties] Properties to set
          */
         function MeshInstance(properties) {
+            this.lightMapperTextureBuffer = {};
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -3292,11 +3293,11 @@ $root.pb = (function() {
 
         /**
          * MeshInstance lightMapperTextureBuffer.
-         * @member {Uint8Array} lightMapperTextureBuffer
+         * @member {Object.<string,Uint8Array>} lightMapperTextureBuffer
          * @memberof pb.MeshInstance
          * @instance
          */
-        MeshInstance.prototype.lightMapperTextureBuffer = $util.newBuffer([]);
+        MeshInstance.prototype.lightMapperTextureBuffer = $util.emptyObject;
 
         /**
          * Creates a new MeshInstance instance using the specified properties.
@@ -3327,7 +3328,8 @@ $root.pb = (function() {
             if (message.material != null && Object.hasOwnProperty.call(message, "material"))
                 $root.pb.Material.encode(message.material, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             if (message.lightMapperTextureBuffer != null && Object.hasOwnProperty.call(message, "lightMapperTextureBuffer"))
-                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.lightMapperTextureBuffer);
+                for (var keys = Object.keys(message.lightMapperTextureBuffer), i = 0; i < keys.length; ++i)
+                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).bytes(message.lightMapperTextureBuffer[keys[i]]).ldelim();
             return writer;
         };
 
@@ -3358,7 +3360,7 @@ $root.pb = (function() {
         MeshInstance.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.MeshInstance();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.MeshInstance(), key, value;
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -3371,7 +3373,26 @@ $root.pb = (function() {
                         break;
                     }
                 case 3: {
-                        message.lightMapperTextureBuffer = reader.bytes();
+                        if (message.lightMapperTextureBuffer === $util.emptyObject)
+                            message.lightMapperTextureBuffer = {};
+                        var end2 = reader.uint32() + reader.pos;
+                        key = "";
+                        value = [];
+                        while (reader.pos < end2) {
+                            var tag2 = reader.uint32();
+                            switch (tag2 >>> 3) {
+                            case 1:
+                                key = reader.string();
+                                break;
+                            case 2:
+                                value = reader.bytes();
+                                break;
+                            default:
+                                reader.skipType(tag2 & 7);
+                                break;
+                            }
+                        }
+                        message.lightMapperTextureBuffer[key] = value;
                         break;
                     }
                 default:
@@ -3419,9 +3440,14 @@ $root.pb = (function() {
                 if (error)
                     return "material." + error;
             }
-            if (message.lightMapperTextureBuffer != null && message.hasOwnProperty("lightMapperTextureBuffer"))
-                if (!(message.lightMapperTextureBuffer && typeof message.lightMapperTextureBuffer.length === "number" || $util.isString(message.lightMapperTextureBuffer)))
-                    return "lightMapperTextureBuffer: buffer expected";
+            if (message.lightMapperTextureBuffer != null && message.hasOwnProperty("lightMapperTextureBuffer")) {
+                if (!$util.isObject(message.lightMapperTextureBuffer))
+                    return "lightMapperTextureBuffer: object expected";
+                var key = Object.keys(message.lightMapperTextureBuffer);
+                for (var i = 0; i < key.length; ++i)
+                    if (!(message.lightMapperTextureBuffer[key[i]] && typeof message.lightMapperTextureBuffer[key[i]].length === "number" || $util.isString(message.lightMapperTextureBuffer[key[i]])))
+                        return "lightMapperTextureBuffer: buffer{k:string} expected";
+            }
             return null;
         };
 
@@ -3447,11 +3473,16 @@ $root.pb = (function() {
                     throw TypeError(".pb.MeshInstance.material: object expected");
                 message.material = $root.pb.Material.fromObject(object.material);
             }
-            if (object.lightMapperTextureBuffer != null)
-                if (typeof object.lightMapperTextureBuffer === "string")
-                    $util.base64.decode(object.lightMapperTextureBuffer, message.lightMapperTextureBuffer = $util.newBuffer($util.base64.length(object.lightMapperTextureBuffer)), 0);
-                else if (object.lightMapperTextureBuffer.length >= 0)
-                    message.lightMapperTextureBuffer = object.lightMapperTextureBuffer;
+            if (object.lightMapperTextureBuffer) {
+                if (typeof object.lightMapperTextureBuffer !== "object")
+                    throw TypeError(".pb.MeshInstance.lightMapperTextureBuffer: object expected");
+                message.lightMapperTextureBuffer = {};
+                for (var keys = Object.keys(object.lightMapperTextureBuffer), i = 0; i < keys.length; ++i)
+                    if (typeof object.lightMapperTextureBuffer[keys[i]] === "string")
+                        $util.base64.decode(object.lightMapperTextureBuffer[keys[i]], message.lightMapperTextureBuffer[keys[i]] = $util.newBuffer($util.base64.length(object.lightMapperTextureBuffer[keys[i]])), 0);
+                    else if (object.lightMapperTextureBuffer[keys[i]].length >= 0)
+                        message.lightMapperTextureBuffer[keys[i]] = object.lightMapperTextureBuffer[keys[i]];
+            }
             return message;
         };
 
@@ -3468,23 +3499,22 @@ $root.pb = (function() {
             if (!options)
                 options = {};
             var object = {};
+            if (options.objects || options.defaults)
+                object.lightMapperTextureBuffer = {};
             if (options.defaults) {
                 object.mesh = null;
                 object.material = null;
-                if (options.bytes === String)
-                    object.lightMapperTextureBuffer = "";
-                else {
-                    object.lightMapperTextureBuffer = [];
-                    if (options.bytes !== Array)
-                        object.lightMapperTextureBuffer = $util.newBuffer(object.lightMapperTextureBuffer);
-                }
             }
             if (message.mesh != null && message.hasOwnProperty("mesh"))
                 object.mesh = $root.pb.Mesh.toObject(message.mesh, options);
             if (message.material != null && message.hasOwnProperty("material"))
                 object.material = $root.pb.Material.toObject(message.material, options);
-            if (message.lightMapperTextureBuffer != null && message.hasOwnProperty("lightMapperTextureBuffer"))
-                object.lightMapperTextureBuffer = options.bytes === String ? $util.base64.encode(message.lightMapperTextureBuffer, 0, message.lightMapperTextureBuffer.length) : options.bytes === Array ? Array.prototype.slice.call(message.lightMapperTextureBuffer) : message.lightMapperTextureBuffer;
+            var keys2;
+            if (message.lightMapperTextureBuffer && (keys2 = Object.keys(message.lightMapperTextureBuffer)).length) {
+                object.lightMapperTextureBuffer = {};
+                for (var j = 0; j < keys2.length; ++j)
+                    object.lightMapperTextureBuffer[keys2[j]] = options.bytes === String ? $util.base64.encode(message.lightMapperTextureBuffer[keys2[j]], 0, message.lightMapperTextureBuffer[keys2[j]].length) : options.bytes === Array ? Array.prototype.slice.call(message.lightMapperTextureBuffer[keys2[j]]) : message.lightMapperTextureBuffer[keys2[j]];
+            }
             return object;
         };
 

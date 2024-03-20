@@ -1210,7 +1210,7 @@ export namespace pb {
         material?: (pb.IMaterial|null);
 
         /** MeshInstance lightMapperTextureBuffer */
-        lightMapperTextureBuffer?: (Uint8Array|null);
+        lightMapperTextureBuffer?: ({ [k: string]: Uint8Array }|null);
     }
 
     /** Represents a MeshInstance. */
@@ -1229,7 +1229,7 @@ export namespace pb {
         public material?: (pb.IMaterial|null);
 
         /** MeshInstance lightMapperTextureBuffer. */
-        public lightMapperTextureBuffer: Uint8Array;
+        public lightMapperTextureBuffer: { [k: string]: Uint8Array };
 
         /**
          * Creates a new MeshInstance instance using the specified properties.
