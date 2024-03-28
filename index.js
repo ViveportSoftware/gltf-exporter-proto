@@ -3513,7 +3513,7 @@ export const pb = $root.pb = (() => {
          * @interface IMeshInstance
          * @property {pb.IMesh|null} [mesh] MeshInstance mesh
          * @property {pb.IMaterial|null} [material] MeshInstance material
-         * @property {Object.<string,pb.IImageData>|null} [lightMapperTextureBuffer] MeshInstance lightMapperTextureBuffer
+         * @property {Object.<string,pb.IImageData>|null} [lightMapperImageData] MeshInstance lightMapperImageData
          */
 
         /**
@@ -3525,7 +3525,7 @@ export const pb = $root.pb = (() => {
          * @param {pb.IMeshInstance=} [properties] Properties to set
          */
         function MeshInstance(properties) {
-            this.lightMapperTextureBuffer = {};
+            this.lightMapperImageData = {};
             if (properties)
                 for (let keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -3549,12 +3549,12 @@ export const pb = $root.pb = (() => {
         MeshInstance.prototype.material = null;
 
         /**
-         * MeshInstance lightMapperTextureBuffer.
-         * @member {Object.<string,pb.IImageData>} lightMapperTextureBuffer
+         * MeshInstance lightMapperImageData.
+         * @member {Object.<string,pb.IImageData>} lightMapperImageData
          * @memberof pb.MeshInstance
          * @instance
          */
-        MeshInstance.prototype.lightMapperTextureBuffer = $util.emptyObject;
+        MeshInstance.prototype.lightMapperImageData = $util.emptyObject;
 
         /**
          * Creates a new MeshInstance instance using the specified properties.
@@ -3584,10 +3584,10 @@ export const pb = $root.pb = (() => {
                 $root.pb.Mesh.encode(message.mesh, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             if (message.material != null && Object.hasOwnProperty.call(message, "material"))
                 $root.pb.Material.encode(message.material, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-            if (message.lightMapperTextureBuffer != null && Object.hasOwnProperty.call(message, "lightMapperTextureBuffer"))
-                for (let keys = Object.keys(message.lightMapperTextureBuffer), i = 0; i < keys.length; ++i) {
+            if (message.lightMapperImageData != null && Object.hasOwnProperty.call(message, "lightMapperImageData"))
+                for (let keys = Object.keys(message.lightMapperImageData), i = 0; i < keys.length; ++i) {
                     writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
-                    $root.pb.ImageData.encode(message.lightMapperTextureBuffer[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                    $root.pb.ImageData.encode(message.lightMapperImageData[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                 }
             return writer;
         };
@@ -3632,8 +3632,8 @@ export const pb = $root.pb = (() => {
                         break;
                     }
                 case 3: {
-                        if (message.lightMapperTextureBuffer === $util.emptyObject)
-                            message.lightMapperTextureBuffer = {};
+                        if (message.lightMapperImageData === $util.emptyObject)
+                            message.lightMapperImageData = {};
                         let end2 = reader.uint32() + reader.pos;
                         key = "";
                         value = null;
@@ -3651,7 +3651,7 @@ export const pb = $root.pb = (() => {
                                 break;
                             }
                         }
-                        message.lightMapperTextureBuffer[key] = value;
+                        message.lightMapperImageData[key] = value;
                         break;
                     }
                 default:
@@ -3699,14 +3699,14 @@ export const pb = $root.pb = (() => {
                 if (error)
                     return "material." + error;
             }
-            if (message.lightMapperTextureBuffer != null && message.hasOwnProperty("lightMapperTextureBuffer")) {
-                if (!$util.isObject(message.lightMapperTextureBuffer))
-                    return "lightMapperTextureBuffer: object expected";
-                let key = Object.keys(message.lightMapperTextureBuffer);
+            if (message.lightMapperImageData != null && message.hasOwnProperty("lightMapperImageData")) {
+                if (!$util.isObject(message.lightMapperImageData))
+                    return "lightMapperImageData: object expected";
+                let key = Object.keys(message.lightMapperImageData);
                 for (let i = 0; i < key.length; ++i) {
-                    let error = $root.pb.ImageData.verify(message.lightMapperTextureBuffer[key[i]]);
+                    let error = $root.pb.ImageData.verify(message.lightMapperImageData[key[i]]);
                     if (error)
-                        return "lightMapperTextureBuffer." + error;
+                        return "lightMapperImageData." + error;
                 }
             }
             return null;
@@ -3734,14 +3734,14 @@ export const pb = $root.pb = (() => {
                     throw TypeError(".pb.MeshInstance.material: object expected");
                 message.material = $root.pb.Material.fromObject(object.material);
             }
-            if (object.lightMapperTextureBuffer) {
-                if (typeof object.lightMapperTextureBuffer !== "object")
-                    throw TypeError(".pb.MeshInstance.lightMapperTextureBuffer: object expected");
-                message.lightMapperTextureBuffer = {};
-                for (let keys = Object.keys(object.lightMapperTextureBuffer), i = 0; i < keys.length; ++i) {
-                    if (typeof object.lightMapperTextureBuffer[keys[i]] !== "object")
-                        throw TypeError(".pb.MeshInstance.lightMapperTextureBuffer: object expected");
-                    message.lightMapperTextureBuffer[keys[i]] = $root.pb.ImageData.fromObject(object.lightMapperTextureBuffer[keys[i]]);
+            if (object.lightMapperImageData) {
+                if (typeof object.lightMapperImageData !== "object")
+                    throw TypeError(".pb.MeshInstance.lightMapperImageData: object expected");
+                message.lightMapperImageData = {};
+                for (let keys = Object.keys(object.lightMapperImageData), i = 0; i < keys.length; ++i) {
+                    if (typeof object.lightMapperImageData[keys[i]] !== "object")
+                        throw TypeError(".pb.MeshInstance.lightMapperImageData: object expected");
+                    message.lightMapperImageData[keys[i]] = $root.pb.ImageData.fromObject(object.lightMapperImageData[keys[i]]);
                 }
             }
             return message;
@@ -3761,7 +3761,7 @@ export const pb = $root.pb = (() => {
                 options = {};
             let object = {};
             if (options.objects || options.defaults)
-                object.lightMapperTextureBuffer = {};
+                object.lightMapperImageData = {};
             if (options.defaults) {
                 object.mesh = null;
                 object.material = null;
@@ -3771,10 +3771,10 @@ export const pb = $root.pb = (() => {
             if (message.material != null && message.hasOwnProperty("material"))
                 object.material = $root.pb.Material.toObject(message.material, options);
             let keys2;
-            if (message.lightMapperTextureBuffer && (keys2 = Object.keys(message.lightMapperTextureBuffer)).length) {
-                object.lightMapperTextureBuffer = {};
+            if (message.lightMapperImageData && (keys2 = Object.keys(message.lightMapperImageData)).length) {
+                object.lightMapperImageData = {};
                 for (let j = 0; j < keys2.length; ++j)
-                    object.lightMapperTextureBuffer[keys2[j]] = $root.pb.ImageData.toObject(message.lightMapperTextureBuffer[keys2[j]], options);
+                    object.lightMapperImageData[keys2[j]] = $root.pb.ImageData.toObject(message.lightMapperImageData[keys2[j]], options);
             }
             return object;
         };
