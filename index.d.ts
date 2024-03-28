@@ -1200,6 +1200,115 @@ export namespace pb {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
+    /** Properties of an ImageData. */
+    interface IImageData {
+
+        /** ImageData width */
+        width?: (number|null);
+
+        /** ImageData height */
+        height?: (number|null);
+
+        /** ImageData pixels */
+        pixels?: (Uint8Array|null);
+    }
+
+    /** Represents an ImageData. */
+    class ImageData implements IImageData {
+
+        /**
+         * Constructs a new ImageData.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: pb.IImageData);
+
+        /** ImageData width. */
+        public width: number;
+
+        /** ImageData height. */
+        public height: number;
+
+        /** ImageData pixels. */
+        public pixels: Uint8Array;
+
+        /**
+         * Creates a new ImageData instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ImageData instance
+         */
+        public static create(properties?: pb.IImageData): pb.ImageData;
+
+        /**
+         * Encodes the specified ImageData message. Does not implicitly {@link pb.ImageData.verify|verify} messages.
+         * @param message ImageData message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: pb.IImageData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ImageData message, length delimited. Does not implicitly {@link pb.ImageData.verify|verify} messages.
+         * @param message ImageData message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: pb.IImageData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an ImageData message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ImageData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): pb.ImageData;
+
+        /**
+         * Decodes an ImageData message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ImageData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): pb.ImageData;
+
+        /**
+         * Verifies an ImageData message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an ImageData message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ImageData
+         */
+        public static fromObject(object: { [k: string]: any }): pb.ImageData;
+
+        /**
+         * Creates a plain object from an ImageData message. Also converts values to other types if specified.
+         * @param message ImageData
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: pb.ImageData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ImageData to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for ImageData
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
     /** Properties of a MeshInstance. */
     interface IMeshInstance {
 
@@ -1210,7 +1319,7 @@ export namespace pb {
         material?: (pb.IMaterial|null);
 
         /** MeshInstance lightMapperTextureBuffer */
-        lightMapperTextureBuffer?: ({ [k: string]: Uint8Array }|null);
+        lightMapperTextureBuffer?: ({ [k: string]: pb.IImageData }|null);
     }
 
     /** Represents a MeshInstance. */
@@ -1229,7 +1338,7 @@ export namespace pb {
         public material?: (pb.IMaterial|null);
 
         /** MeshInstance lightMapperTextureBuffer. */
-        public lightMapperTextureBuffer: { [k: string]: Uint8Array };
+        public lightMapperTextureBuffer: { [k: string]: pb.IImageData };
 
         /**
          * Creates a new MeshInstance instance using the specified properties.

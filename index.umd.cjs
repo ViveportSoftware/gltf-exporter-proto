@@ -3248,6 +3248,265 @@ $root.pb = (function() {
         return Mesh;
     })();
 
+    pb.ImageData = (function() {
+
+        /**
+         * Properties of an ImageData.
+         * @memberof pb
+         * @interface IImageData
+         * @property {number|null} [width] ImageData width
+         * @property {number|null} [height] ImageData height
+         * @property {Uint8Array|null} [pixels] ImageData pixels
+         */
+
+        /**
+         * Constructs a new ImageData.
+         * @memberof pb
+         * @classdesc Represents an ImageData.
+         * @implements IImageData
+         * @constructor
+         * @param {pb.IImageData=} [properties] Properties to set
+         */
+        function ImageData(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * ImageData width.
+         * @member {number} width
+         * @memberof pb.ImageData
+         * @instance
+         */
+        ImageData.prototype.width = 0;
+
+        /**
+         * ImageData height.
+         * @member {number} height
+         * @memberof pb.ImageData
+         * @instance
+         */
+        ImageData.prototype.height = 0;
+
+        /**
+         * ImageData pixels.
+         * @member {Uint8Array} pixels
+         * @memberof pb.ImageData
+         * @instance
+         */
+        ImageData.prototype.pixels = $util.newBuffer([]);
+
+        /**
+         * Creates a new ImageData instance using the specified properties.
+         * @function create
+         * @memberof pb.ImageData
+         * @static
+         * @param {pb.IImageData=} [properties] Properties to set
+         * @returns {pb.ImageData} ImageData instance
+         */
+        ImageData.create = function create(properties) {
+            return new ImageData(properties);
+        };
+
+        /**
+         * Encodes the specified ImageData message. Does not implicitly {@link pb.ImageData.verify|verify} messages.
+         * @function encode
+         * @memberof pb.ImageData
+         * @static
+         * @param {pb.IImageData} message ImageData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ImageData.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.width);
+            if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.height);
+            if (message.pixels != null && Object.hasOwnProperty.call(message, "pixels"))
+                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.pixels);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified ImageData message, length delimited. Does not implicitly {@link pb.ImageData.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof pb.ImageData
+         * @static
+         * @param {pb.IImageData} message ImageData message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        ImageData.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an ImageData message from the specified reader or buffer.
+         * @function decode
+         * @memberof pb.ImageData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {pb.ImageData} ImageData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ImageData.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.pb.ImageData();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.width = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.height = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.pixels = reader.bytes();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an ImageData message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof pb.ImageData
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {pb.ImageData} ImageData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        ImageData.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an ImageData message.
+         * @function verify
+         * @memberof pb.ImageData
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        ImageData.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.width != null && message.hasOwnProperty("width"))
+                if (!$util.isInteger(message.width))
+                    return "width: integer expected";
+            if (message.height != null && message.hasOwnProperty("height"))
+                if (!$util.isInteger(message.height))
+                    return "height: integer expected";
+            if (message.pixels != null && message.hasOwnProperty("pixels"))
+                if (!(message.pixels && typeof message.pixels.length === "number" || $util.isString(message.pixels)))
+                    return "pixels: buffer expected";
+            return null;
+        };
+
+        /**
+         * Creates an ImageData message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof pb.ImageData
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {pb.ImageData} ImageData
+         */
+        ImageData.fromObject = function fromObject(object) {
+            if (object instanceof $root.pb.ImageData)
+                return object;
+            var message = new $root.pb.ImageData();
+            if (object.width != null)
+                message.width = object.width | 0;
+            if (object.height != null)
+                message.height = object.height | 0;
+            if (object.pixels != null)
+                if (typeof object.pixels === "string")
+                    $util.base64.decode(object.pixels, message.pixels = $util.newBuffer($util.base64.length(object.pixels)), 0);
+                else if (object.pixels.length >= 0)
+                    message.pixels = object.pixels;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an ImageData message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof pb.ImageData
+         * @static
+         * @param {pb.ImageData} message ImageData
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        ImageData.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.width = 0;
+                object.height = 0;
+                if (options.bytes === String)
+                    object.pixels = "";
+                else {
+                    object.pixels = [];
+                    if (options.bytes !== Array)
+                        object.pixels = $util.newBuffer(object.pixels);
+                }
+            }
+            if (message.width != null && message.hasOwnProperty("width"))
+                object.width = message.width;
+            if (message.height != null && message.hasOwnProperty("height"))
+                object.height = message.height;
+            if (message.pixels != null && message.hasOwnProperty("pixels"))
+                object.pixels = options.bytes === String ? $util.base64.encode(message.pixels, 0, message.pixels.length) : options.bytes === Array ? Array.prototype.slice.call(message.pixels) : message.pixels;
+            return object;
+        };
+
+        /**
+         * Converts this ImageData to JSON.
+         * @function toJSON
+         * @memberof pb.ImageData
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        ImageData.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for ImageData
+         * @function getTypeUrl
+         * @memberof pb.ImageData
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        ImageData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/pb.ImageData";
+        };
+
+        return ImageData;
+    })();
+
     pb.MeshInstance = (function() {
 
         /**
@@ -3256,7 +3515,7 @@ $root.pb = (function() {
          * @interface IMeshInstance
          * @property {pb.IMesh|null} [mesh] MeshInstance mesh
          * @property {pb.IMaterial|null} [material] MeshInstance material
-         * @property {Object.<string,Uint8Array>|null} [lightMapperTextureBuffer] MeshInstance lightMapperTextureBuffer
+         * @property {Object.<string,pb.IImageData>|null} [lightMapperTextureBuffer] MeshInstance lightMapperTextureBuffer
          */
 
         /**
@@ -3293,7 +3552,7 @@ $root.pb = (function() {
 
         /**
          * MeshInstance lightMapperTextureBuffer.
-         * @member {Object.<string,Uint8Array>} lightMapperTextureBuffer
+         * @member {Object.<string,pb.IImageData>} lightMapperTextureBuffer
          * @memberof pb.MeshInstance
          * @instance
          */
@@ -3328,8 +3587,10 @@ $root.pb = (function() {
             if (message.material != null && Object.hasOwnProperty.call(message, "material"))
                 $root.pb.Material.encode(message.material, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             if (message.lightMapperTextureBuffer != null && Object.hasOwnProperty.call(message, "lightMapperTextureBuffer"))
-                for (var keys = Object.keys(message.lightMapperTextureBuffer), i = 0; i < keys.length; ++i)
-                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).bytes(message.lightMapperTextureBuffer[keys[i]]).ldelim();
+                for (var keys = Object.keys(message.lightMapperTextureBuffer), i = 0; i < keys.length; ++i) {
+                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                    $root.pb.ImageData.encode(message.lightMapperTextureBuffer[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                }
             return writer;
         };
 
@@ -3377,7 +3638,7 @@ $root.pb = (function() {
                             message.lightMapperTextureBuffer = {};
                         var end2 = reader.uint32() + reader.pos;
                         key = "";
-                        value = [];
+                        value = null;
                         while (reader.pos < end2) {
                             var tag2 = reader.uint32();
                             switch (tag2 >>> 3) {
@@ -3385,7 +3646,7 @@ $root.pb = (function() {
                                 key = reader.string();
                                 break;
                             case 2:
-                                value = reader.bytes();
+                                value = $root.pb.ImageData.decode(reader, reader.uint32());
                                 break;
                             default:
                                 reader.skipType(tag2 & 7);
@@ -3444,9 +3705,11 @@ $root.pb = (function() {
                 if (!$util.isObject(message.lightMapperTextureBuffer))
                     return "lightMapperTextureBuffer: object expected";
                 var key = Object.keys(message.lightMapperTextureBuffer);
-                for (var i = 0; i < key.length; ++i)
-                    if (!(message.lightMapperTextureBuffer[key[i]] && typeof message.lightMapperTextureBuffer[key[i]].length === "number" || $util.isString(message.lightMapperTextureBuffer[key[i]])))
-                        return "lightMapperTextureBuffer: buffer{k:string} expected";
+                for (var i = 0; i < key.length; ++i) {
+                    var error = $root.pb.ImageData.verify(message.lightMapperTextureBuffer[key[i]]);
+                    if (error)
+                        return "lightMapperTextureBuffer." + error;
+                }
             }
             return null;
         };
@@ -3477,11 +3740,11 @@ $root.pb = (function() {
                 if (typeof object.lightMapperTextureBuffer !== "object")
                     throw TypeError(".pb.MeshInstance.lightMapperTextureBuffer: object expected");
                 message.lightMapperTextureBuffer = {};
-                for (var keys = Object.keys(object.lightMapperTextureBuffer), i = 0; i < keys.length; ++i)
-                    if (typeof object.lightMapperTextureBuffer[keys[i]] === "string")
-                        $util.base64.decode(object.lightMapperTextureBuffer[keys[i]], message.lightMapperTextureBuffer[keys[i]] = $util.newBuffer($util.base64.length(object.lightMapperTextureBuffer[keys[i]])), 0);
-                    else if (object.lightMapperTextureBuffer[keys[i]].length >= 0)
-                        message.lightMapperTextureBuffer[keys[i]] = object.lightMapperTextureBuffer[keys[i]];
+                for (var keys = Object.keys(object.lightMapperTextureBuffer), i = 0; i < keys.length; ++i) {
+                    if (typeof object.lightMapperTextureBuffer[keys[i]] !== "object")
+                        throw TypeError(".pb.MeshInstance.lightMapperTextureBuffer: object expected");
+                    message.lightMapperTextureBuffer[keys[i]] = $root.pb.ImageData.fromObject(object.lightMapperTextureBuffer[keys[i]]);
+                }
             }
             return message;
         };
@@ -3513,7 +3776,7 @@ $root.pb = (function() {
             if (message.lightMapperTextureBuffer && (keys2 = Object.keys(message.lightMapperTextureBuffer)).length) {
                 object.lightMapperTextureBuffer = {};
                 for (var j = 0; j < keys2.length; ++j)
-                    object.lightMapperTextureBuffer[keys2[j]] = options.bytes === String ? $util.base64.encode(message.lightMapperTextureBuffer[keys2[j]], 0, message.lightMapperTextureBuffer[keys2[j]].length) : options.bytes === Array ? Array.prototype.slice.call(message.lightMapperTextureBuffer[keys2[j]]) : message.lightMapperTextureBuffer[keys2[j]];
+                    object.lightMapperTextureBuffer[keys2[j]] = $root.pb.ImageData.toObject(message.lightMapperTextureBuffer[keys2[j]], options);
             }
             return object;
         };
