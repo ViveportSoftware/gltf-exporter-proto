@@ -81,6 +81,8 @@ message Material {
     string metalnessMapChannel = 30;
     string specularMapChannel  = 31;
     bool glossInvert           = 32;
+    Color ambient              = 33;
+    float emissiveIntensity    = 34;
 }
 
 message Mesh {

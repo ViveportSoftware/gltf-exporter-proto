@@ -888,6 +888,12 @@ export namespace pb {
 
         /** Material glossInvert */
         glossInvert?: (boolean|null);
+
+        /** Material ambient */
+        ambient?: (pb.IColor|null);
+
+        /** Material emissiveIntensity */
+        emissiveIntensity?: (number|null);
     }
 
     /** Represents a Material. */
@@ -994,6 +1000,12 @@ export namespace pb {
 
         /** Material glossInvert. */
         public glossInvert: boolean;
+
+        /** Material ambient. */
+        public ambient?: (pb.IColor|null);
+
+        /** Material emissiveIntensity. */
+        public emissiveIntensity: number;
 
         /**
          * Creates a new Material instance using the specified properties.

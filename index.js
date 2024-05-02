@@ -1900,6 +1900,8 @@ export const pb = $root.pb = (() => {
          * @property {string|null} [metalnessMapChannel] Material metalnessMapChannel
          * @property {string|null} [specularMapChannel] Material specularMapChannel
          * @property {boolean|null} [glossInvert] Material glossInvert
+         * @property {pb.IColor|null} [ambient] Material ambient
+         * @property {number|null} [emissiveIntensity] Material emissiveIntensity
          */
 
         /**
@@ -2175,6 +2177,22 @@ export const pb = $root.pb = (() => {
         Material.prototype.glossInvert = false;
 
         /**
+         * Material ambient.
+         * @member {pb.IColor|null|undefined} ambient
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.ambient = null;
+
+        /**
+         * Material emissiveIntensity.
+         * @member {number} emissiveIntensity
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.emissiveIntensity = 0;
+
+        /**
          * Creates a new Material instance using the specified properties.
          * @function create
          * @memberof pb.Material
@@ -2265,6 +2283,10 @@ export const pb = $root.pb = (() => {
                 writer.uint32(/* id 31, wireType 2 =*/250).string(message.specularMapChannel);
             if (message.glossInvert != null && Object.hasOwnProperty.call(message, "glossInvert"))
                 writer.uint32(/* id 32, wireType 0 =*/256).bool(message.glossInvert);
+            if (message.ambient != null && Object.hasOwnProperty.call(message, "ambient"))
+                $root.pb.Color.encode(message.ambient, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
+            if (message.emissiveIntensity != null && Object.hasOwnProperty.call(message, "emissiveIntensity"))
+                writer.uint32(/* id 34, wireType 5 =*/277).float(message.emissiveIntensity);
             return writer;
         };
 
@@ -2446,6 +2468,14 @@ export const pb = $root.pb = (() => {
                         message.glossInvert = reader.bool();
                         break;
                     }
+                case 33: {
+                        message.ambient = $root.pb.Color.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 34: {
+                        message.emissiveIntensity = reader.float();
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -2610,6 +2640,14 @@ export const pb = $root.pb = (() => {
             if (message.glossInvert != null && message.hasOwnProperty("glossInvert"))
                 if (typeof message.glossInvert !== "boolean")
                     return "glossInvert: boolean expected";
+            if (message.ambient != null && message.hasOwnProperty("ambient")) {
+                let error = $root.pb.Color.verify(message.ambient);
+                if (error)
+                    return "ambient." + error;
+            }
+            if (message.emissiveIntensity != null && message.hasOwnProperty("emissiveIntensity"))
+                if (typeof message.emissiveIntensity !== "number")
+                    return "emissiveIntensity: number expected";
             return null;
         };
 
@@ -2736,6 +2774,13 @@ export const pb = $root.pb = (() => {
                 message.specularMapChannel = String(object.specularMapChannel);
             if (object.glossInvert != null)
                 message.glossInvert = Boolean(object.glossInvert);
+            if (object.ambient != null) {
+                if (typeof object.ambient !== "object")
+                    throw TypeError(".pb.Material.ambient: object expected");
+                message.ambient = $root.pb.Color.fromObject(object.ambient);
+            }
+            if (object.emissiveIntensity != null)
+                message.emissiveIntensity = Number(object.emissiveIntensity);
             return message;
         };
 
@@ -2786,6 +2831,8 @@ export const pb = $root.pb = (() => {
                 object.metalnessMapChannel = "";
                 object.specularMapChannel = "";
                 object.glossInvert = false;
+                object.ambient = null;
+                object.emissiveIntensity = 0;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -2855,6 +2902,10 @@ export const pb = $root.pb = (() => {
                 object.specularMapChannel = message.specularMapChannel;
             if (message.glossInvert != null && message.hasOwnProperty("glossInvert"))
                 object.glossInvert = message.glossInvert;
+            if (message.ambient != null && message.hasOwnProperty("ambient"))
+                object.ambient = $root.pb.Color.toObject(message.ambient, options);
+            if (message.emissiveIntensity != null && message.hasOwnProperty("emissiveIntensity"))
+                object.emissiveIntensity = options.json && !isFinite(message.emissiveIntensity) ? String(message.emissiveIntensity) : message.emissiveIntensity;
             return object;
         };
 
