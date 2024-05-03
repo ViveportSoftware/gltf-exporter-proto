@@ -1903,6 +1903,7 @@ export const pb = $root.pb = (() => {
          * @property {pb.IColor|null} [ambient] Material ambient
          * @property {number|null} [emissiveIntensity] Material emissiveIntensity
          * @property {number|null} [refractionIndex] Material refractionIndex
+         * @property {number|null} [refraction] Material refraction
          */
 
         /**
@@ -2202,6 +2203,14 @@ export const pb = $root.pb = (() => {
         Material.prototype.refractionIndex = 0;
 
         /**
+         * Material refraction.
+         * @member {number} refraction
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.refraction = 0;
+
+        /**
          * Creates a new Material instance using the specified properties.
          * @function create
          * @memberof pb.Material
@@ -2298,6 +2307,8 @@ export const pb = $root.pb = (() => {
                 writer.uint32(/* id 34, wireType 5 =*/277).float(message.emissiveIntensity);
             if (message.refractionIndex != null && Object.hasOwnProperty.call(message, "refractionIndex"))
                 writer.uint32(/* id 35, wireType 5 =*/285).float(message.refractionIndex);
+            if (message.refraction != null && Object.hasOwnProperty.call(message, "refraction"))
+                writer.uint32(/* id 36, wireType 5 =*/293).float(message.refraction);
             return writer;
         };
 
@@ -2491,6 +2502,10 @@ export const pb = $root.pb = (() => {
                         message.refractionIndex = reader.float();
                         break;
                     }
+                case 36: {
+                        message.refraction = reader.float();
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -2666,6 +2681,9 @@ export const pb = $root.pb = (() => {
             if (message.refractionIndex != null && message.hasOwnProperty("refractionIndex"))
                 if (typeof message.refractionIndex !== "number")
                     return "refractionIndex: number expected";
+            if (message.refraction != null && message.hasOwnProperty("refraction"))
+                if (typeof message.refraction !== "number")
+                    return "refraction: number expected";
             return null;
         };
 
@@ -2801,6 +2819,8 @@ export const pb = $root.pb = (() => {
                 message.emissiveIntensity = Number(object.emissiveIntensity);
             if (object.refractionIndex != null)
                 message.refractionIndex = Number(object.refractionIndex);
+            if (object.refraction != null)
+                message.refraction = Number(object.refraction);
             return message;
         };
 
@@ -2854,6 +2874,7 @@ export const pb = $root.pb = (() => {
                 object.ambient = null;
                 object.emissiveIntensity = 0;
                 object.refractionIndex = 0;
+                object.refraction = 0;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -2929,6 +2950,8 @@ export const pb = $root.pb = (() => {
                 object.emissiveIntensity = options.json && !isFinite(message.emissiveIntensity) ? String(message.emissiveIntensity) : message.emissiveIntensity;
             if (message.refractionIndex != null && message.hasOwnProperty("refractionIndex"))
                 object.refractionIndex = options.json && !isFinite(message.refractionIndex) ? String(message.refractionIndex) : message.refractionIndex;
+            if (message.refraction != null && message.hasOwnProperty("refraction"))
+                object.refraction = options.json && !isFinite(message.refraction) ? String(message.refraction) : message.refraction;
             return object;
         };
 

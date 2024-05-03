@@ -84,6 +84,7 @@ message Material {
     Color ambient              = 33;
     float emissiveIntensity    = 34;
     float refractionIndex      = 35;
+    float refraction           = 36;
 }
 
 message Mesh {

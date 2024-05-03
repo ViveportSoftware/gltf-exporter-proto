@@ -897,6 +897,9 @@ export namespace pb {
 
         /** Material refractionIndex */
         refractionIndex?: (number|null);
+
+        /** Material refraction */
+        refraction?: (number|null);
     }
 
     /** Represents a Material. */
@@ -1012,6 +1015,9 @@ export namespace pb {
 
         /** Material refractionIndex. */
         public refractionIndex: number;
+
+        /** Material refraction. */
+        public refraction: number;
 
         /**
          * Creates a new Material instance using the specified properties.
