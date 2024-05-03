@@ -1904,6 +1904,7 @@ $root.pb = (function() {
          * @property {boolean|null} [glossInvert] Material glossInvert
          * @property {pb.IColor|null} [ambient] Material ambient
          * @property {number|null} [emissiveIntensity] Material emissiveIntensity
+         * @property {number|null} [refractionIndex] Material refractionIndex
          */
 
         /**
@@ -2195,6 +2196,14 @@ $root.pb = (function() {
         Material.prototype.emissiveIntensity = 0;
 
         /**
+         * Material refractionIndex.
+         * @member {number} refractionIndex
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.refractionIndex = 0;
+
+        /**
          * Creates a new Material instance using the specified properties.
          * @function create
          * @memberof pb.Material
@@ -2289,6 +2298,8 @@ $root.pb = (function() {
                 $root.pb.Color.encode(message.ambient, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
             if (message.emissiveIntensity != null && Object.hasOwnProperty.call(message, "emissiveIntensity"))
                 writer.uint32(/* id 34, wireType 5 =*/277).float(message.emissiveIntensity);
+            if (message.refractionIndex != null && Object.hasOwnProperty.call(message, "refractionIndex"))
+                writer.uint32(/* id 35, wireType 5 =*/285).float(message.refractionIndex);
             return writer;
         };
 
@@ -2478,6 +2489,10 @@ $root.pb = (function() {
                         message.emissiveIntensity = reader.float();
                         break;
                     }
+                case 35: {
+                        message.refractionIndex = reader.float();
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -2650,6 +2665,9 @@ $root.pb = (function() {
             if (message.emissiveIntensity != null && message.hasOwnProperty("emissiveIntensity"))
                 if (typeof message.emissiveIntensity !== "number")
                     return "emissiveIntensity: number expected";
+            if (message.refractionIndex != null && message.hasOwnProperty("refractionIndex"))
+                if (typeof message.refractionIndex !== "number")
+                    return "refractionIndex: number expected";
             return null;
         };
 
@@ -2783,6 +2801,8 @@ $root.pb = (function() {
             }
             if (object.emissiveIntensity != null)
                 message.emissiveIntensity = Number(object.emissiveIntensity);
+            if (object.refractionIndex != null)
+                message.refractionIndex = Number(object.refractionIndex);
             return message;
         };
 
@@ -2835,6 +2855,7 @@ $root.pb = (function() {
                 object.glossInvert = false;
                 object.ambient = null;
                 object.emissiveIntensity = 0;
+                object.refractionIndex = 0;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -2908,6 +2929,8 @@ $root.pb = (function() {
                 object.ambient = $root.pb.Color.toObject(message.ambient, options);
             if (message.emissiveIntensity != null && message.hasOwnProperty("emissiveIntensity"))
                 object.emissiveIntensity = options.json && !isFinite(message.emissiveIntensity) ? String(message.emissiveIntensity) : message.emissiveIntensity;
+            if (message.refractionIndex != null && message.hasOwnProperty("refractionIndex"))
+                object.refractionIndex = options.json && !isFinite(message.refractionIndex) ? String(message.refractionIndex) : message.refractionIndex;
             return object;
         };
 

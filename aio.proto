@@ -83,6 +83,7 @@ message Material {
     bool glossInvert           = 32;
     Color ambient              = 33;
     float emissiveIntensity    = 34;
+    float refractionIndex      = 35;
 }
 
 message Mesh {

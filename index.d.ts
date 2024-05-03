@@ -894,6 +894,9 @@ export namespace pb {
 
         /** Material emissiveIntensity */
         emissiveIntensity?: (number|null);
+
+        /** Material refractionIndex */
+        refractionIndex?: (number|null);
     }
 
     /** Represents a Material. */
@@ -1006,6 +1009,9 @@ export namespace pb {
 
         /** Material emissiveIntensity. */
         public emissiveIntensity: number;
+
+        /** Material refractionIndex. */
+        public refractionIndex: number;
 
         /**
          * Creates a new Material instance using the specified properties.
