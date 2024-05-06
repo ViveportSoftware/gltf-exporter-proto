@@ -1904,7 +1904,7 @@ export const pb = $root.pb = (() => {
          * @property {number|null} [emissiveIntensity] Material emissiveIntensity
          * @property {number|null} [refractionIndex] Material refractionIndex
          * @property {number|null} [refraction] Material refraction
-         * @property {boolean|null} [diffuseMapTint] Material diffuseMapTint
+         * @property {boolean|null} [diffuseTint] Material diffuseTint
          */
 
         /**
@@ -2212,12 +2212,12 @@ export const pb = $root.pb = (() => {
         Material.prototype.refraction = 0;
 
         /**
-         * Material diffuseMapTint.
-         * @member {boolean} diffuseMapTint
+         * Material diffuseTint.
+         * @member {boolean} diffuseTint
          * @memberof pb.Material
          * @instance
          */
-        Material.prototype.diffuseMapTint = false;
+        Material.prototype.diffuseTint = false;
 
         /**
          * Creates a new Material instance using the specified properties.
@@ -2318,8 +2318,8 @@ export const pb = $root.pb = (() => {
                 writer.uint32(/* id 35, wireType 5 =*/285).float(message.refractionIndex);
             if (message.refraction != null && Object.hasOwnProperty.call(message, "refraction"))
                 writer.uint32(/* id 36, wireType 5 =*/293).float(message.refraction);
-            if (message.diffuseMapTint != null && Object.hasOwnProperty.call(message, "diffuseMapTint"))
-                writer.uint32(/* id 37, wireType 0 =*/296).bool(message.diffuseMapTint);
+            if (message.diffuseTint != null && Object.hasOwnProperty.call(message, "diffuseTint"))
+                writer.uint32(/* id 37, wireType 0 =*/296).bool(message.diffuseTint);
             return writer;
         };
 
@@ -2518,7 +2518,7 @@ export const pb = $root.pb = (() => {
                         break;
                     }
                 case 37: {
-                        message.diffuseMapTint = reader.bool();
+                        message.diffuseTint = reader.bool();
                         break;
                     }
                 default:
@@ -2699,9 +2699,9 @@ export const pb = $root.pb = (() => {
             if (message.refraction != null && message.hasOwnProperty("refraction"))
                 if (typeof message.refraction !== "number")
                     return "refraction: number expected";
-            if (message.diffuseMapTint != null && message.hasOwnProperty("diffuseMapTint"))
-                if (typeof message.diffuseMapTint !== "boolean")
-                    return "diffuseMapTint: boolean expected";
+            if (message.diffuseTint != null && message.hasOwnProperty("diffuseTint"))
+                if (typeof message.diffuseTint !== "boolean")
+                    return "diffuseTint: boolean expected";
             return null;
         };
 
@@ -2839,8 +2839,8 @@ export const pb = $root.pb = (() => {
                 message.refractionIndex = Number(object.refractionIndex);
             if (object.refraction != null)
                 message.refraction = Number(object.refraction);
-            if (object.diffuseMapTint != null)
-                message.diffuseMapTint = Boolean(object.diffuseMapTint);
+            if (object.diffuseTint != null)
+                message.diffuseTint = Boolean(object.diffuseTint);
             return message;
         };
 
@@ -2895,7 +2895,7 @@ export const pb = $root.pb = (() => {
                 object.emissiveIntensity = 0;
                 object.refractionIndex = 0;
                 object.refraction = 0;
-                object.diffuseMapTint = false;
+                object.diffuseTint = false;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -2973,8 +2973,8 @@ export const pb = $root.pb = (() => {
                 object.refractionIndex = options.json && !isFinite(message.refractionIndex) ? String(message.refractionIndex) : message.refractionIndex;
             if (message.refraction != null && message.hasOwnProperty("refraction"))
                 object.refraction = options.json && !isFinite(message.refraction) ? String(message.refraction) : message.refraction;
-            if (message.diffuseMapTint != null && message.hasOwnProperty("diffuseMapTint"))
-                object.diffuseMapTint = message.diffuseMapTint;
+            if (message.diffuseTint != null && message.hasOwnProperty("diffuseTint"))
+                object.diffuseTint = message.diffuseTint;
             return object;
         };
 

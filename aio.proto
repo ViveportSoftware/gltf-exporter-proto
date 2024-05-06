@@ -85,7 +85,7 @@ message Material {
     float emissiveIntensity    = 34;
     float refractionIndex      = 35;
     float refraction           = 36;
-    bool diffuseMapTint        = 37;
+    bool diffuseTint           = 37;
 }
 
 message Mesh {
