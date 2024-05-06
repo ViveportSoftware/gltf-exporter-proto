@@ -1906,6 +1906,7 @@ $root.pb = (function() {
          * @property {number|null} [emissiveIntensity] Material emissiveIntensity
          * @property {number|null} [refractionIndex] Material refractionIndex
          * @property {number|null} [refraction] Material refraction
+         * @property {boolean|null} [diffuseMapTint] Material diffuseMapTint
          */
 
         /**
@@ -2213,6 +2214,14 @@ $root.pb = (function() {
         Material.prototype.refraction = 0;
 
         /**
+         * Material diffuseMapTint.
+         * @member {boolean} diffuseMapTint
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.diffuseMapTint = false;
+
+        /**
          * Creates a new Material instance using the specified properties.
          * @function create
          * @memberof pb.Material
@@ -2311,6 +2320,8 @@ $root.pb = (function() {
                 writer.uint32(/* id 35, wireType 5 =*/285).float(message.refractionIndex);
             if (message.refraction != null && Object.hasOwnProperty.call(message, "refraction"))
                 writer.uint32(/* id 36, wireType 5 =*/293).float(message.refraction);
+            if (message.diffuseMapTint != null && Object.hasOwnProperty.call(message, "diffuseMapTint"))
+                writer.uint32(/* id 37, wireType 0 =*/296).bool(message.diffuseMapTint);
             return writer;
         };
 
@@ -2508,6 +2519,10 @@ $root.pb = (function() {
                         message.refraction = reader.float();
                         break;
                     }
+                case 37: {
+                        message.diffuseMapTint = reader.bool();
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -2686,6 +2701,9 @@ $root.pb = (function() {
             if (message.refraction != null && message.hasOwnProperty("refraction"))
                 if (typeof message.refraction !== "number")
                     return "refraction: number expected";
+            if (message.diffuseMapTint != null && message.hasOwnProperty("diffuseMapTint"))
+                if (typeof message.diffuseMapTint !== "boolean")
+                    return "diffuseMapTint: boolean expected";
             return null;
         };
 
@@ -2823,6 +2841,8 @@ $root.pb = (function() {
                 message.refractionIndex = Number(object.refractionIndex);
             if (object.refraction != null)
                 message.refraction = Number(object.refraction);
+            if (object.diffuseMapTint != null)
+                message.diffuseMapTint = Boolean(object.diffuseMapTint);
             return message;
         };
 
@@ -2877,6 +2897,7 @@ $root.pb = (function() {
                 object.emissiveIntensity = 0;
                 object.refractionIndex = 0;
                 object.refraction = 0;
+                object.diffuseMapTint = false;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -2954,6 +2975,8 @@ $root.pb = (function() {
                 object.refractionIndex = options.json && !isFinite(message.refractionIndex) ? String(message.refractionIndex) : message.refractionIndex;
             if (message.refraction != null && message.hasOwnProperty("refraction"))
                 object.refraction = options.json && !isFinite(message.refraction) ? String(message.refraction) : message.refraction;
+            if (message.diffuseMapTint != null && message.hasOwnProperty("diffuseMapTint"))
+                object.diffuseMapTint = message.diffuseMapTint;
             return object;
         };
 

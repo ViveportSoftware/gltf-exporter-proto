@@ -900,6 +900,9 @@ export namespace pb {
 
         /** Material refraction */
         refraction?: (number|null);
+
+        /** Material diffuseMapTint */
+        diffuseMapTint?: (boolean|null);
     }
 
     /** Represents a Material. */
@@ -1018,6 +1021,9 @@ export namespace pb {
 
         /** Material refraction. */
         public refraction: number;
+
+        /** Material diffuseMapTint. */
+        public diffuseMapTint: boolean;
 
         /**
          * Creates a new Material instance using the specified properties.
