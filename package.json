@@ -1,6 +1,6 @@
 {
   "name": "gltf-exporter-proto",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "",
   "main": "./index.umd.cjs",
   "module": "./index.js",
