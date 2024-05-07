@@ -3376,7 +3376,7 @@ $root.pb = (function() {
          * @interface IImageData
          * @property {number|null} [width] ImageData width
          * @property {number|null} [height] ImageData height
-         * @property {Uint8Array|null} [pixels] ImageData pixels
+         * @property {string|null} [uuid] ImageData uuid
          */
 
         /**
@@ -3411,12 +3411,12 @@ $root.pb = (function() {
         ImageData.prototype.height = 0;
 
         /**
-         * ImageData pixels.
-         * @member {Uint8Array} pixels
+         * ImageData uuid.
+         * @member {string} uuid
          * @memberof pb.ImageData
          * @instance
          */
-        ImageData.prototype.pixels = $util.newBuffer([]);
+        ImageData.prototype.uuid = "";
 
         /**
          * Creates a new ImageData instance using the specified properties.
@@ -3446,8 +3446,8 @@ $root.pb = (function() {
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.width);
             if (message.height != null && Object.hasOwnProperty.call(message, "height"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.height);
-            if (message.pixels != null && Object.hasOwnProperty.call(message, "pixels"))
-                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.pixels);
+            if (message.uuid != null && Object.hasOwnProperty.call(message, "uuid"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.uuid);
             return writer;
         };
 
@@ -3491,7 +3491,7 @@ $root.pb = (function() {
                         break;
                     }
                 case 3: {
-                        message.pixels = reader.bytes();
+                        message.uuid = reader.string();
                         break;
                     }
                 default:
@@ -3535,9 +3535,9 @@ $root.pb = (function() {
             if (message.height != null && message.hasOwnProperty("height"))
                 if (!$util.isInteger(message.height))
                     return "height: integer expected";
-            if (message.pixels != null && message.hasOwnProperty("pixels"))
-                if (!(message.pixels && typeof message.pixels.length === "number" || $util.isString(message.pixels)))
-                    return "pixels: buffer expected";
+            if (message.uuid != null && message.hasOwnProperty("uuid"))
+                if (!$util.isString(message.uuid))
+                    return "uuid: string expected";
             return null;
         };
 
@@ -3557,11 +3557,8 @@ $root.pb = (function() {
                 message.width = object.width | 0;
             if (object.height != null)
                 message.height = object.height | 0;
-            if (object.pixels != null)
-                if (typeof object.pixels === "string")
-                    $util.base64.decode(object.pixels, message.pixels = $util.newBuffer($util.base64.length(object.pixels)), 0);
-                else if (object.pixels.length >= 0)
-                    message.pixels = object.pixels;
+            if (object.uuid != null)
+                message.uuid = String(object.uuid);
             return message;
         };
 
@@ -3581,20 +3578,14 @@ $root.pb = (function() {
             if (options.defaults) {
                 object.width = 0;
                 object.height = 0;
-                if (options.bytes === String)
-                    object.pixels = "";
-                else {
-                    object.pixels = [];
-                    if (options.bytes !== Array)
-                        object.pixels = $util.newBuffer(object.pixels);
-                }
+                object.uuid = "";
             }
             if (message.width != null && message.hasOwnProperty("width"))
                 object.width = message.width;
             if (message.height != null && message.hasOwnProperty("height"))
                 object.height = message.height;
-            if (message.pixels != null && message.hasOwnProperty("pixels"))
-                object.pixels = options.bytes === String ? $util.base64.encode(message.pixels, 0, message.pixels.length) : options.bytes === Array ? Array.prototype.slice.call(message.pixels) : message.pixels;
+            if (message.uuid != null && message.hasOwnProperty("uuid"))
+                object.uuid = message.uuid;
             return object;
         };
 

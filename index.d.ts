@@ -1239,8 +1239,8 @@ export namespace pb {
         /** ImageData height */
         height?: (number|null);
 
-        /** ImageData pixels */
-        pixels?: (Uint8Array|null);
+        /** ImageData uuid */
+        uuid?: (string|null);
     }
 
     /** Represents an ImageData. */
@@ -1258,8 +1258,8 @@ export namespace pb {
         /** ImageData height. */
         public height: number;
 
-        /** ImageData pixels. */
-        public pixels: Uint8Array;
+        /** ImageData uuid. */
+        public uuid: string;
 
         /**
          * Creates a new ImageData instance using the specified properties.
