@@ -3623,6 +3623,7 @@ export const pb = $root.pb = (() => {
          * @memberof pb
          * @interface IMeshInstance
          * @property {number|null} [id] MeshInstance id
+         * @property {string|null} [nodeName] MeshInstance nodeName
          * @property {pb.IMesh|null} [mesh] MeshInstance mesh
          * @property {pb.IMaterial|null} [material] MeshInstance material
          * @property {Object.<string,pb.IImageData>|null} [lightMapperImageData] MeshInstance lightMapperImageData
@@ -3651,6 +3652,14 @@ export const pb = $root.pb = (() => {
          * @instance
          */
         MeshInstance.prototype.id = 0;
+
+        /**
+         * MeshInstance nodeName.
+         * @member {string} nodeName
+         * @memberof pb.MeshInstance
+         * @instance
+         */
+        MeshInstance.prototype.nodeName = "";
 
         /**
          * MeshInstance mesh.
@@ -3702,13 +3711,15 @@ export const pb = $root.pb = (() => {
                 writer = $Writer.create();
             if (message.id != null && Object.hasOwnProperty.call(message, "id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.id);
+            if (message.nodeName != null && Object.hasOwnProperty.call(message, "nodeName"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nodeName);
             if (message.mesh != null && Object.hasOwnProperty.call(message, "mesh"))
-                $root.pb.Mesh.encode(message.mesh, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                $root.pb.Mesh.encode(message.mesh, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             if (message.material != null && Object.hasOwnProperty.call(message, "material"))
-                $root.pb.Material.encode(message.material, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                $root.pb.Material.encode(message.material, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             if (message.lightMapperImageData != null && Object.hasOwnProperty.call(message, "lightMapperImageData"))
                 for (let keys = Object.keys(message.lightMapperImageData), i = 0; i < keys.length; ++i) {
-                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                     $root.pb.ImageData.encode(message.lightMapperImageData[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                 }
             return writer;
@@ -3750,14 +3761,18 @@ export const pb = $root.pb = (() => {
                         break;
                     }
                 case 2: {
-                        message.mesh = $root.pb.Mesh.decode(reader, reader.uint32());
+                        message.nodeName = reader.string();
                         break;
                     }
                 case 3: {
-                        message.material = $root.pb.Material.decode(reader, reader.uint32());
+                        message.mesh = $root.pb.Mesh.decode(reader, reader.uint32());
                         break;
                     }
                 case 4: {
+                        message.material = $root.pb.Material.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 5: {
                         if (message.lightMapperImageData === $util.emptyObject)
                             message.lightMapperImageData = {};
                         let end2 = reader.uint32() + reader.pos;
@@ -3818,6 +3833,9 @@ export const pb = $root.pb = (() => {
             if (message.id != null && message.hasOwnProperty("id"))
                 if (!$util.isInteger(message.id))
                     return "id: integer expected";
+            if (message.nodeName != null && message.hasOwnProperty("nodeName"))
+                if (!$util.isString(message.nodeName))
+                    return "nodeName: string expected";
             if (message.mesh != null && message.hasOwnProperty("mesh")) {
                 let error = $root.pb.Mesh.verify(message.mesh);
                 if (error)
@@ -3855,6 +3873,8 @@ export const pb = $root.pb = (() => {
             let message = new $root.pb.MeshInstance();
             if (object.id != null)
                 message.id = object.id | 0;
+            if (object.nodeName != null)
+                message.nodeName = String(object.nodeName);
             if (object.mesh != null) {
                 if (typeof object.mesh !== "object")
                     throw TypeError(".pb.MeshInstance.mesh: object expected");
@@ -3895,11 +3915,14 @@ export const pb = $root.pb = (() => {
                 object.lightMapperImageData = {};
             if (options.defaults) {
                 object.id = 0;
+                object.nodeName = "";
                 object.mesh = null;
                 object.material = null;
             }
             if (message.id != null && message.hasOwnProperty("id"))
                 object.id = message.id;
+            if (message.nodeName != null && message.hasOwnProperty("nodeName"))
+                object.nodeName = message.nodeName;
             if (message.mesh != null && message.hasOwnProperty("mesh"))
                 object.mesh = $root.pb.Mesh.toObject(message.mesh, options);
             if (message.material != null && message.hasOwnProperty("material"))

@@ -1345,6 +1345,9 @@ export namespace pb {
         /** MeshInstance id */
         id?: (number|null);
 
+        /** MeshInstance nodeName */
+        nodeName?: (string|null);
+
         /** MeshInstance mesh */
         mesh?: (pb.IMesh|null);
 
@@ -1366,6 +1369,9 @@ export namespace pb {
 
         /** MeshInstance id. */
         public id: number;
+
+        /** MeshInstance nodeName. */
+        public nodeName: string;
 
         /** MeshInstance mesh. */
         public mesh?: (pb.IMesh|null);

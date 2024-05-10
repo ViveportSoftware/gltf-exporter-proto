@@ -105,9 +105,10 @@ message ImageData {
 
 message MeshInstance {
     int32 id                                    = 1;
-    Mesh mesh                                   = 2;
-    Material material                           = 3;
-    map<string, ImageData> lightMapperImageData = 4;
+    string nodeName                             = 2;
+    Mesh mesh                                   = 3;
+    Material material                           = 4;
+    map<string, ImageData> lightMapperImageData = 5;
 }
 
 message Node {
