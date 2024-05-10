@@ -1342,6 +1342,9 @@ export namespace pb {
     /** Properties of a MeshInstance. */
     interface IMeshInstance {
 
+        /** MeshInstance id */
+        id?: (number|null);
+
         /** MeshInstance mesh */
         mesh?: (pb.IMesh|null);
 
@@ -1360,6 +1363,9 @@ export namespace pb {
          * @param [properties] Properties to set
          */
         constructor(properties?: pb.IMeshInstance);
+
+        /** MeshInstance id. */
+        public id: number;
 
         /** MeshInstance mesh. */
         public mesh?: (pb.IMesh|null);

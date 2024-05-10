@@ -3624,6 +3624,7 @@ $root.pb = (function() {
          * Properties of a MeshInstance.
          * @memberof pb
          * @interface IMeshInstance
+         * @property {number|null} [id] MeshInstance id
          * @property {pb.IMesh|null} [mesh] MeshInstance mesh
          * @property {pb.IMaterial|null} [material] MeshInstance material
          * @property {Object.<string,pb.IImageData>|null} [lightMapperImageData] MeshInstance lightMapperImageData
@@ -3644,6 +3645,14 @@ $root.pb = (function() {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+
+        /**
+         * MeshInstance id.
+         * @member {number} id
+         * @memberof pb.MeshInstance
+         * @instance
+         */
+        MeshInstance.prototype.id = 0;
 
         /**
          * MeshInstance mesh.
@@ -3693,13 +3702,15 @@ $root.pb = (function() {
         MeshInstance.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.id);
             if (message.mesh != null && Object.hasOwnProperty.call(message, "mesh"))
-                $root.pb.Mesh.encode(message.mesh, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                $root.pb.Mesh.encode(message.mesh, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             if (message.material != null && Object.hasOwnProperty.call(message, "material"))
-                $root.pb.Material.encode(message.material, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                $root.pb.Material.encode(message.material, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             if (message.lightMapperImageData != null && Object.hasOwnProperty.call(message, "lightMapperImageData"))
                 for (var keys = Object.keys(message.lightMapperImageData), i = 0; i < keys.length; ++i) {
-                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                     $root.pb.ImageData.encode(message.lightMapperImageData[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                 }
             return writer;
@@ -3737,14 +3748,18 @@ $root.pb = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1: {
-                        message.mesh = $root.pb.Mesh.decode(reader, reader.uint32());
+                        message.id = reader.int32();
                         break;
                     }
                 case 2: {
-                        message.material = $root.pb.Material.decode(reader, reader.uint32());
+                        message.mesh = $root.pb.Mesh.decode(reader, reader.uint32());
                         break;
                     }
                 case 3: {
+                        message.material = $root.pb.Material.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 4: {
                         if (message.lightMapperImageData === $util.emptyObject)
                             message.lightMapperImageData = {};
                         var end2 = reader.uint32() + reader.pos;
@@ -3802,6 +3817,9 @@ $root.pb = (function() {
         MeshInstance.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
             if (message.mesh != null && message.hasOwnProperty("mesh")) {
                 var error = $root.pb.Mesh.verify(message.mesh);
                 if (error)
@@ -3837,6 +3855,8 @@ $root.pb = (function() {
             if (object instanceof $root.pb.MeshInstance)
                 return object;
             var message = new $root.pb.MeshInstance();
+            if (object.id != null)
+                message.id = object.id | 0;
             if (object.mesh != null) {
                 if (typeof object.mesh !== "object")
                     throw TypeError(".pb.MeshInstance.mesh: object expected");
@@ -3876,9 +3896,12 @@ $root.pb = (function() {
             if (options.objects || options.defaults)
                 object.lightMapperImageData = {};
             if (options.defaults) {
+                object.id = 0;
                 object.mesh = null;
                 object.material = null;
             }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
             if (message.mesh != null && message.hasOwnProperty("mesh"))
                 object.mesh = $root.pb.Mesh.toObject(message.mesh, options);
             if (message.material != null && message.hasOwnProperty("material"))
