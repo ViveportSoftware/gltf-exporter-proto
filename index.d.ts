@@ -936,6 +936,15 @@ export namespace pb {
 
         /** Material opacityVertexColorChannel */
         opacityVertexColorChannel?: (string|null);
+
+        /** Material alphaTest */
+        alphaTest?: (number|null);
+
+        /** Material alphaToCoverage */
+        alphaToCoverage?: (number|null);
+
+        /** Material blendType */
+        blendType?: (number|null);
     }
 
     /** Represents a Material. */
@@ -1090,6 +1099,15 @@ export namespace pb {
 
         /** Material opacityVertexColorChannel. */
         public opacityVertexColorChannel: string;
+
+        /** Material alphaTest. */
+        public alphaTest: number;
+
+        /** Material alphaToCoverage. */
+        public alphaToCoverage: number;
+
+        /** Material blendType. */
+        public blendType: number;
 
         /**
          * Creates a new Material instance using the specified properties.

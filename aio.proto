@@ -97,6 +97,9 @@ message Material {
     string opacityShadowDither       = 46;
     bool opacityVertexColor          = 47;
     string opacityVertexColorChannel = 48;
+    float alphaTest                  = 49;
+    float alphaToCoverage            = 50;
+    int32 blendType                  = 51;
 }
 
 message Mesh {

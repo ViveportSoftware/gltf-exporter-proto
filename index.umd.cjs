@@ -1918,6 +1918,9 @@ $root.pb = (function() {
          * @property {string|null} [opacityShadowDither] Material opacityShadowDither
          * @property {boolean|null} [opacityVertexColor] Material opacityVertexColor
          * @property {string|null} [opacityVertexColorChannel] Material opacityVertexColorChannel
+         * @property {number|null} [alphaTest] Material alphaTest
+         * @property {number|null} [alphaToCoverage] Material alphaToCoverage
+         * @property {number|null} [blendType] Material blendType
          */
 
         /**
@@ -2321,6 +2324,30 @@ $root.pb = (function() {
         Material.prototype.opacityVertexColorChannel = "";
 
         /**
+         * Material alphaTest.
+         * @member {number} alphaTest
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.alphaTest = 0;
+
+        /**
+         * Material alphaToCoverage.
+         * @member {number} alphaToCoverage
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.alphaToCoverage = 0;
+
+        /**
+         * Material blendType.
+         * @member {number} blendType
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.blendType = 0;
+
+        /**
          * Creates a new Material instance using the specified properties.
          * @function create
          * @memberof pb.Material
@@ -2443,6 +2470,12 @@ $root.pb = (function() {
                 writer.uint32(/* id 47, wireType 0 =*/376).bool(message.opacityVertexColor);
             if (message.opacityVertexColorChannel != null && Object.hasOwnProperty.call(message, "opacityVertexColorChannel"))
                 writer.uint32(/* id 48, wireType 2 =*/386).string(message.opacityVertexColorChannel);
+            if (message.alphaTest != null && Object.hasOwnProperty.call(message, "alphaTest"))
+                writer.uint32(/* id 49, wireType 5 =*/397).float(message.alphaTest);
+            if (message.alphaToCoverage != null && Object.hasOwnProperty.call(message, "alphaToCoverage"))
+                writer.uint32(/* id 50, wireType 5 =*/405).float(message.alphaToCoverage);
+            if (message.blendType != null && Object.hasOwnProperty.call(message, "blendType"))
+                writer.uint32(/* id 51, wireType 0 =*/408).int32(message.blendType);
             return writer;
         };
 
@@ -2688,6 +2721,18 @@ $root.pb = (function() {
                         message.opacityVertexColorChannel = reader.string();
                         break;
                     }
+                case 49: {
+                        message.alphaTest = reader.float();
+                        break;
+                    }
+                case 50: {
+                        message.alphaToCoverage = reader.float();
+                        break;
+                    }
+                case 51: {
+                        message.blendType = reader.int32();
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -2906,6 +2951,15 @@ $root.pb = (function() {
             if (message.opacityVertexColorChannel != null && message.hasOwnProperty("opacityVertexColorChannel"))
                 if (!$util.isString(message.opacityVertexColorChannel))
                     return "opacityVertexColorChannel: string expected";
+            if (message.alphaTest != null && message.hasOwnProperty("alphaTest"))
+                if (typeof message.alphaTest !== "number")
+                    return "alphaTest: number expected";
+            if (message.alphaToCoverage != null && message.hasOwnProperty("alphaToCoverage"))
+                if (typeof message.alphaToCoverage !== "number")
+                    return "alphaToCoverage: number expected";
+            if (message.blendType != null && message.hasOwnProperty("blendType"))
+                if (!$util.isInteger(message.blendType))
+                    return "blendType: integer expected";
             return null;
         };
 
@@ -3073,6 +3127,12 @@ $root.pb = (function() {
                 message.opacityVertexColor = Boolean(object.opacityVertexColor);
             if (object.opacityVertexColorChannel != null)
                 message.opacityVertexColorChannel = String(object.opacityVertexColorChannel);
+            if (object.alphaTest != null)
+                message.alphaTest = Number(object.alphaTest);
+            if (object.alphaToCoverage != null)
+                message.alphaToCoverage = Number(object.alphaToCoverage);
+            if (object.blendType != null)
+                message.blendType = object.blendType | 0;
             return message;
         };
 
@@ -3139,6 +3199,9 @@ $root.pb = (function() {
                 object.opacityShadowDither = "";
                 object.opacityVertexColor = false;
                 object.opacityVertexColorChannel = "";
+                object.alphaTest = 0;
+                object.alphaToCoverage = 0;
+                object.blendType = 0;
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -3240,6 +3303,12 @@ $root.pb = (function() {
                 object.opacityVertexColor = message.opacityVertexColor;
             if (message.opacityVertexColorChannel != null && message.hasOwnProperty("opacityVertexColorChannel"))
                 object.opacityVertexColorChannel = message.opacityVertexColorChannel;
+            if (message.alphaTest != null && message.hasOwnProperty("alphaTest"))
+                object.alphaTest = options.json && !isFinite(message.alphaTest) ? String(message.alphaTest) : message.alphaTest;
+            if (message.alphaToCoverage != null && message.hasOwnProperty("alphaToCoverage"))
+                object.alphaToCoverage = options.json && !isFinite(message.alphaToCoverage) ? String(message.alphaToCoverage) : message.alphaToCoverage;
+            if (message.blendType != null && message.hasOwnProperty("blendType"))
+                object.blendType = message.blendType;
             return object;
         };
 
