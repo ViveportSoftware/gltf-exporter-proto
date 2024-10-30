@@ -903,6 +903,39 @@ export namespace pb {
 
         /** Material diffuseTint */
         diffuseTint?: (boolean|null);
+
+        /** Material opacity */
+        opacity?: (number|null);
+
+        /** Material opacityDither */
+        opacityDither?: (string|null);
+
+        /** Material opacityFadesSpecular */
+        opacityFadesSpecular?: (boolean|null);
+
+        /** Material opacityMapChannel */
+        opacityMapChannel?: (string|null);
+
+        /** Material opacityMapOffset */
+        opacityMapOffset?: (pb.IVec2|null);
+
+        /** Material opacityMapRotation */
+        opacityMapRotation?: (number|null);
+
+        /** Material opacityMapTiling */
+        opacityMapTiling?: (pb.IVec2|null);
+
+        /** Material opacityMapUv */
+        opacityMapUv?: (number|null);
+
+        /** Material opacityShadowDither */
+        opacityShadowDither?: (string|null);
+
+        /** Material opacityVertexColor */
+        opacityVertexColor?: (boolean|null);
+
+        /** Material opacityVertexColorChannel */
+        opacityVertexColorChannel?: (string|null);
     }
 
     /** Represents a Material. */
@@ -1024,6 +1057,39 @@ export namespace pb {
 
         /** Material diffuseTint. */
         public diffuseTint: boolean;
+
+        /** Material opacity. */
+        public opacity: number;
+
+        /** Material opacityDither. */
+        public opacityDither: string;
+
+        /** Material opacityFadesSpecular. */
+        public opacityFadesSpecular: boolean;
+
+        /** Material opacityMapChannel. */
+        public opacityMapChannel: string;
+
+        /** Material opacityMapOffset. */
+        public opacityMapOffset?: (pb.IVec2|null);
+
+        /** Material opacityMapRotation. */
+        public opacityMapRotation: number;
+
+        /** Material opacityMapTiling. */
+        public opacityMapTiling?: (pb.IVec2|null);
+
+        /** Material opacityMapUv. */
+        public opacityMapUv: number;
+
+        /** Material opacityShadowDither. */
+        public opacityShadowDither: string;
+
+        /** Material opacityVertexColor. */
+        public opacityVertexColor: boolean;
+
+        /** Material opacityVertexColorChannel. */
+        public opacityVertexColorChannel: string;
 
         /**
          * Creates a new Material instance using the specified properties.

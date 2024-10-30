@@ -1907,6 +1907,17 @@ $root.pb = (function() {
          * @property {number|null} [refractionIndex] Material refractionIndex
          * @property {number|null} [refraction] Material refraction
          * @property {boolean|null} [diffuseTint] Material diffuseTint
+         * @property {number|null} [opacity] Material opacity
+         * @property {string|null} [opacityDither] Material opacityDither
+         * @property {boolean|null} [opacityFadesSpecular] Material opacityFadesSpecular
+         * @property {string|null} [opacityMapChannel] Material opacityMapChannel
+         * @property {pb.IVec2|null} [opacityMapOffset] Material opacityMapOffset
+         * @property {number|null} [opacityMapRotation] Material opacityMapRotation
+         * @property {pb.IVec2|null} [opacityMapTiling] Material opacityMapTiling
+         * @property {number|null} [opacityMapUv] Material opacityMapUv
+         * @property {string|null} [opacityShadowDither] Material opacityShadowDither
+         * @property {boolean|null} [opacityVertexColor] Material opacityVertexColor
+         * @property {string|null} [opacityVertexColorChannel] Material opacityVertexColorChannel
          */
 
         /**
@@ -2222,6 +2233,94 @@ $root.pb = (function() {
         Material.prototype.diffuseTint = false;
 
         /**
+         * Material opacity.
+         * @member {number} opacity
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.opacity = 0;
+
+        /**
+         * Material opacityDither.
+         * @member {string} opacityDither
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.opacityDither = "";
+
+        /**
+         * Material opacityFadesSpecular.
+         * @member {boolean} opacityFadesSpecular
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.opacityFadesSpecular = false;
+
+        /**
+         * Material opacityMapChannel.
+         * @member {string} opacityMapChannel
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.opacityMapChannel = "";
+
+        /**
+         * Material opacityMapOffset.
+         * @member {pb.IVec2|null|undefined} opacityMapOffset
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.opacityMapOffset = null;
+
+        /**
+         * Material opacityMapRotation.
+         * @member {number} opacityMapRotation
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.opacityMapRotation = 0;
+
+        /**
+         * Material opacityMapTiling.
+         * @member {pb.IVec2|null|undefined} opacityMapTiling
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.opacityMapTiling = null;
+
+        /**
+         * Material opacityMapUv.
+         * @member {number} opacityMapUv
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.opacityMapUv = 0;
+
+        /**
+         * Material opacityShadowDither.
+         * @member {string} opacityShadowDither
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.opacityShadowDither = "";
+
+        /**
+         * Material opacityVertexColor.
+         * @member {boolean} opacityVertexColor
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.opacityVertexColor = false;
+
+        /**
+         * Material opacityVertexColorChannel.
+         * @member {string} opacityVertexColorChannel
+         * @memberof pb.Material
+         * @instance
+         */
+        Material.prototype.opacityVertexColorChannel = "";
+
+        /**
          * Creates a new Material instance using the specified properties.
          * @function create
          * @memberof pb.Material
@@ -2322,6 +2421,28 @@ $root.pb = (function() {
                 writer.uint32(/* id 36, wireType 5 =*/293).float(message.refraction);
             if (message.diffuseTint != null && Object.hasOwnProperty.call(message, "diffuseTint"))
                 writer.uint32(/* id 37, wireType 0 =*/296).bool(message.diffuseTint);
+            if (message.opacity != null && Object.hasOwnProperty.call(message, "opacity"))
+                writer.uint32(/* id 38, wireType 0 =*/304).int32(message.opacity);
+            if (message.opacityDither != null && Object.hasOwnProperty.call(message, "opacityDither"))
+                writer.uint32(/* id 39, wireType 2 =*/314).string(message.opacityDither);
+            if (message.opacityFadesSpecular != null && Object.hasOwnProperty.call(message, "opacityFadesSpecular"))
+                writer.uint32(/* id 40, wireType 0 =*/320).bool(message.opacityFadesSpecular);
+            if (message.opacityMapChannel != null && Object.hasOwnProperty.call(message, "opacityMapChannel"))
+                writer.uint32(/* id 41, wireType 2 =*/330).string(message.opacityMapChannel);
+            if (message.opacityMapOffset != null && Object.hasOwnProperty.call(message, "opacityMapOffset"))
+                $root.pb.Vec2.encode(message.opacityMapOffset, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
+            if (message.opacityMapRotation != null && Object.hasOwnProperty.call(message, "opacityMapRotation"))
+                writer.uint32(/* id 43, wireType 5 =*/349).float(message.opacityMapRotation);
+            if (message.opacityMapTiling != null && Object.hasOwnProperty.call(message, "opacityMapTiling"))
+                $root.pb.Vec2.encode(message.opacityMapTiling, writer.uint32(/* id 44, wireType 2 =*/354).fork()).ldelim();
+            if (message.opacityMapUv != null && Object.hasOwnProperty.call(message, "opacityMapUv"))
+                writer.uint32(/* id 45, wireType 0 =*/360).int32(message.opacityMapUv);
+            if (message.opacityShadowDither != null && Object.hasOwnProperty.call(message, "opacityShadowDither"))
+                writer.uint32(/* id 46, wireType 2 =*/370).string(message.opacityShadowDither);
+            if (message.opacityVertexColor != null && Object.hasOwnProperty.call(message, "opacityVertexColor"))
+                writer.uint32(/* id 47, wireType 0 =*/376).bool(message.opacityVertexColor);
+            if (message.opacityVertexColorChannel != null && Object.hasOwnProperty.call(message, "opacityVertexColorChannel"))
+                writer.uint32(/* id 48, wireType 2 =*/386).string(message.opacityVertexColorChannel);
             return writer;
         };
 
@@ -2523,6 +2644,50 @@ $root.pb = (function() {
                         message.diffuseTint = reader.bool();
                         break;
                     }
+                case 38: {
+                        message.opacity = reader.int32();
+                        break;
+                    }
+                case 39: {
+                        message.opacityDither = reader.string();
+                        break;
+                    }
+                case 40: {
+                        message.opacityFadesSpecular = reader.bool();
+                        break;
+                    }
+                case 41: {
+                        message.opacityMapChannel = reader.string();
+                        break;
+                    }
+                case 42: {
+                        message.opacityMapOffset = $root.pb.Vec2.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 43: {
+                        message.opacityMapRotation = reader.float();
+                        break;
+                    }
+                case 44: {
+                        message.opacityMapTiling = $root.pb.Vec2.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 45: {
+                        message.opacityMapUv = reader.int32();
+                        break;
+                    }
+                case 46: {
+                        message.opacityShadowDither = reader.string();
+                        break;
+                    }
+                case 47: {
+                        message.opacityVertexColor = reader.bool();
+                        break;
+                    }
+                case 48: {
+                        message.opacityVertexColorChannel = reader.string();
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -2704,6 +2869,43 @@ $root.pb = (function() {
             if (message.diffuseTint != null && message.hasOwnProperty("diffuseTint"))
                 if (typeof message.diffuseTint !== "boolean")
                     return "diffuseTint: boolean expected";
+            if (message.opacity != null && message.hasOwnProperty("opacity"))
+                if (!$util.isInteger(message.opacity))
+                    return "opacity: integer expected";
+            if (message.opacityDither != null && message.hasOwnProperty("opacityDither"))
+                if (!$util.isString(message.opacityDither))
+                    return "opacityDither: string expected";
+            if (message.opacityFadesSpecular != null && message.hasOwnProperty("opacityFadesSpecular"))
+                if (typeof message.opacityFadesSpecular !== "boolean")
+                    return "opacityFadesSpecular: boolean expected";
+            if (message.opacityMapChannel != null && message.hasOwnProperty("opacityMapChannel"))
+                if (!$util.isString(message.opacityMapChannel))
+                    return "opacityMapChannel: string expected";
+            if (message.opacityMapOffset != null && message.hasOwnProperty("opacityMapOffset")) {
+                var error = $root.pb.Vec2.verify(message.opacityMapOffset);
+                if (error)
+                    return "opacityMapOffset." + error;
+            }
+            if (message.opacityMapRotation != null && message.hasOwnProperty("opacityMapRotation"))
+                if (typeof message.opacityMapRotation !== "number")
+                    return "opacityMapRotation: number expected";
+            if (message.opacityMapTiling != null && message.hasOwnProperty("opacityMapTiling")) {
+                var error = $root.pb.Vec2.verify(message.opacityMapTiling);
+                if (error)
+                    return "opacityMapTiling." + error;
+            }
+            if (message.opacityMapUv != null && message.hasOwnProperty("opacityMapUv"))
+                if (!$util.isInteger(message.opacityMapUv))
+                    return "opacityMapUv: integer expected";
+            if (message.opacityShadowDither != null && message.hasOwnProperty("opacityShadowDither"))
+                if (!$util.isString(message.opacityShadowDither))
+                    return "opacityShadowDither: string expected";
+            if (message.opacityVertexColor != null && message.hasOwnProperty("opacityVertexColor"))
+                if (typeof message.opacityVertexColor !== "boolean")
+                    return "opacityVertexColor: boolean expected";
+            if (message.opacityVertexColorChannel != null && message.hasOwnProperty("opacityVertexColorChannel"))
+                if (!$util.isString(message.opacityVertexColorChannel))
+                    return "opacityVertexColorChannel: string expected";
             return null;
         };
 
@@ -2843,6 +3045,34 @@ $root.pb = (function() {
                 message.refraction = Number(object.refraction);
             if (object.diffuseTint != null)
                 message.diffuseTint = Boolean(object.diffuseTint);
+            if (object.opacity != null)
+                message.opacity = object.opacity | 0;
+            if (object.opacityDither != null)
+                message.opacityDither = String(object.opacityDither);
+            if (object.opacityFadesSpecular != null)
+                message.opacityFadesSpecular = Boolean(object.opacityFadesSpecular);
+            if (object.opacityMapChannel != null)
+                message.opacityMapChannel = String(object.opacityMapChannel);
+            if (object.opacityMapOffset != null) {
+                if (typeof object.opacityMapOffset !== "object")
+                    throw TypeError(".pb.Material.opacityMapOffset: object expected");
+                message.opacityMapOffset = $root.pb.Vec2.fromObject(object.opacityMapOffset);
+            }
+            if (object.opacityMapRotation != null)
+                message.opacityMapRotation = Number(object.opacityMapRotation);
+            if (object.opacityMapTiling != null) {
+                if (typeof object.opacityMapTiling !== "object")
+                    throw TypeError(".pb.Material.opacityMapTiling: object expected");
+                message.opacityMapTiling = $root.pb.Vec2.fromObject(object.opacityMapTiling);
+            }
+            if (object.opacityMapUv != null)
+                message.opacityMapUv = object.opacityMapUv | 0;
+            if (object.opacityShadowDither != null)
+                message.opacityShadowDither = String(object.opacityShadowDither);
+            if (object.opacityVertexColor != null)
+                message.opacityVertexColor = Boolean(object.opacityVertexColor);
+            if (object.opacityVertexColorChannel != null)
+                message.opacityVertexColorChannel = String(object.opacityVertexColorChannel);
             return message;
         };
 
@@ -2898,6 +3128,17 @@ $root.pb = (function() {
                 object.refractionIndex = 0;
                 object.refraction = 0;
                 object.diffuseTint = false;
+                object.opacity = 0;
+                object.opacityDither = "";
+                object.opacityFadesSpecular = false;
+                object.opacityMapChannel = "";
+                object.opacityMapOffset = null;
+                object.opacityMapRotation = 0;
+                object.opacityMapTiling = null;
+                object.opacityMapUv = 0;
+                object.opacityShadowDither = "";
+                object.opacityVertexColor = false;
+                object.opacityVertexColorChannel = "";
             }
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
@@ -2977,6 +3218,28 @@ $root.pb = (function() {
                 object.refraction = options.json && !isFinite(message.refraction) ? String(message.refraction) : message.refraction;
             if (message.diffuseTint != null && message.hasOwnProperty("diffuseTint"))
                 object.diffuseTint = message.diffuseTint;
+            if (message.opacity != null && message.hasOwnProperty("opacity"))
+                object.opacity = message.opacity;
+            if (message.opacityDither != null && message.hasOwnProperty("opacityDither"))
+                object.opacityDither = message.opacityDither;
+            if (message.opacityFadesSpecular != null && message.hasOwnProperty("opacityFadesSpecular"))
+                object.opacityFadesSpecular = message.opacityFadesSpecular;
+            if (message.opacityMapChannel != null && message.hasOwnProperty("opacityMapChannel"))
+                object.opacityMapChannel = message.opacityMapChannel;
+            if (message.opacityMapOffset != null && message.hasOwnProperty("opacityMapOffset"))
+                object.opacityMapOffset = $root.pb.Vec2.toObject(message.opacityMapOffset, options);
+            if (message.opacityMapRotation != null && message.hasOwnProperty("opacityMapRotation"))
+                object.opacityMapRotation = options.json && !isFinite(message.opacityMapRotation) ? String(message.opacityMapRotation) : message.opacityMapRotation;
+            if (message.opacityMapTiling != null && message.hasOwnProperty("opacityMapTiling"))
+                object.opacityMapTiling = $root.pb.Vec2.toObject(message.opacityMapTiling, options);
+            if (message.opacityMapUv != null && message.hasOwnProperty("opacityMapUv"))
+                object.opacityMapUv = message.opacityMapUv;
+            if (message.opacityShadowDither != null && message.hasOwnProperty("opacityShadowDither"))
+                object.opacityShadowDither = message.opacityShadowDither;
+            if (message.opacityVertexColor != null && message.hasOwnProperty("opacityVertexColor"))
+                object.opacityVertexColor = message.opacityVertexColor;
+            if (message.opacityVertexColorChannel != null && message.hasOwnProperty("opacityVertexColorChannel"))
+                object.opacityVertexColorChannel = message.opacityVertexColorChannel;
             return object;
         };
 
