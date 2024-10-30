@@ -941,7 +941,7 @@ export namespace pb {
         alphaTest?: (number|null);
 
         /** Material alphaToCoverage */
-        alphaToCoverage?: (number|null);
+        alphaToCoverage?: (boolean|null);
 
         /** Material blendType */
         blendType?: (number|null);
@@ -1104,7 +1104,7 @@ export namespace pb {
         public alphaTest: number;
 
         /** Material alphaToCoverage. */
-        public alphaToCoverage: number;
+        public alphaToCoverage: boolean;
 
         /** Material blendType. */
         public blendType: number;

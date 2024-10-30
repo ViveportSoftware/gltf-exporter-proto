@@ -98,7 +98,7 @@ message Material {
     bool opacityVertexColor          = 47;
     string opacityVertexColorChannel = 48;
     float alphaTest                  = 49;
-    float alphaToCoverage            = 50;
+    bool alphaToCoverage             = 50;
     int32 blendType                  = 51;
 }
 

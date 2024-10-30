@@ -1919,7 +1919,7 @@ $root.pb = (function() {
          * @property {boolean|null} [opacityVertexColor] Material opacityVertexColor
          * @property {string|null} [opacityVertexColorChannel] Material opacityVertexColorChannel
          * @property {number|null} [alphaTest] Material alphaTest
-         * @property {number|null} [alphaToCoverage] Material alphaToCoverage
+         * @property {boolean|null} [alphaToCoverage] Material alphaToCoverage
          * @property {number|null} [blendType] Material blendType
          */
 
@@ -2333,11 +2333,11 @@ $root.pb = (function() {
 
         /**
          * Material alphaToCoverage.
-         * @member {number} alphaToCoverage
+         * @member {boolean} alphaToCoverage
          * @memberof pb.Material
          * @instance
          */
-        Material.prototype.alphaToCoverage = 0;
+        Material.prototype.alphaToCoverage = false;
 
         /**
          * Material blendType.
@@ -2473,7 +2473,7 @@ $root.pb = (function() {
             if (message.alphaTest != null && Object.hasOwnProperty.call(message, "alphaTest"))
                 writer.uint32(/* id 49, wireType 5 =*/397).float(message.alphaTest);
             if (message.alphaToCoverage != null && Object.hasOwnProperty.call(message, "alphaToCoverage"))
-                writer.uint32(/* id 50, wireType 5 =*/405).float(message.alphaToCoverage);
+                writer.uint32(/* id 50, wireType 0 =*/400).bool(message.alphaToCoverage);
             if (message.blendType != null && Object.hasOwnProperty.call(message, "blendType"))
                 writer.uint32(/* id 51, wireType 0 =*/408).int32(message.blendType);
             return writer;
@@ -2726,7 +2726,7 @@ $root.pb = (function() {
                         break;
                     }
                 case 50: {
-                        message.alphaToCoverage = reader.float();
+                        message.alphaToCoverage = reader.bool();
                         break;
                     }
                 case 51: {
@@ -2955,8 +2955,8 @@ $root.pb = (function() {
                 if (typeof message.alphaTest !== "number")
                     return "alphaTest: number expected";
             if (message.alphaToCoverage != null && message.hasOwnProperty("alphaToCoverage"))
-                if (typeof message.alphaToCoverage !== "number")
-                    return "alphaToCoverage: number expected";
+                if (typeof message.alphaToCoverage !== "boolean")
+                    return "alphaToCoverage: boolean expected";
             if (message.blendType != null && message.hasOwnProperty("blendType"))
                 if (!$util.isInteger(message.blendType))
                     return "blendType: integer expected";
@@ -3130,7 +3130,7 @@ $root.pb = (function() {
             if (object.alphaTest != null)
                 message.alphaTest = Number(object.alphaTest);
             if (object.alphaToCoverage != null)
-                message.alphaToCoverage = Number(object.alphaToCoverage);
+                message.alphaToCoverage = Boolean(object.alphaToCoverage);
             if (object.blendType != null)
                 message.blendType = object.blendType | 0;
             return message;
@@ -3200,7 +3200,7 @@ $root.pb = (function() {
                 object.opacityVertexColor = false;
                 object.opacityVertexColorChannel = "";
                 object.alphaTest = 0;
-                object.alphaToCoverage = 0;
+                object.alphaToCoverage = false;
                 object.blendType = 0;
             }
             if (message.name != null && message.hasOwnProperty("name"))
@@ -3306,7 +3306,7 @@ $root.pb = (function() {
             if (message.alphaTest != null && message.hasOwnProperty("alphaTest"))
                 object.alphaTest = options.json && !isFinite(message.alphaTest) ? String(message.alphaTest) : message.alphaTest;
             if (message.alphaToCoverage != null && message.hasOwnProperty("alphaToCoverage"))
-                object.alphaToCoverage = options.json && !isFinite(message.alphaToCoverage) ? String(message.alphaToCoverage) : message.alphaToCoverage;
+                object.alphaToCoverage = message.alphaToCoverage;
             if (message.blendType != null && message.hasOwnProperty("blendType"))
                 object.blendType = message.blendType;
             return object;
